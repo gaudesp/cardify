@@ -1,5 +1,7 @@
 <header>
-  <h2><span><%= page.title.to_s.first&.upcase %></span> <%= page.title.to_s[1..].lstrip %></h2>
+  <% first_letter = page.title[0] %>
+  <% rest_of_title = page.title[1..] %>
+  <h2><span><%= first_letter %></span><%= rest_of_title %></h2>
 </header>
 
 <% page.cards.each do |card| %>

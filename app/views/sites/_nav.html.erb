@@ -1,9 +1,15 @@
-<nav>
+<nav data-controller="nav">
   <ul>
     <% site.pages.each do |page| %>
-      <li data-tab="<%= page.slug %>">
-        <%= link_to "/#{site.slug}/#{page.slug}", data: { turbo_frame: "page_content", turbo_action: "replace" } do %>
-          <span class="nav-label"><%= page.title %></span>
+      <li
+        data-nav-target="item"
+        data-tab="<%= page.slug %>"
+      >
+        <%= link_to "/#{site.slug}/#{page.slug}",
+          class: "nav-link",
+          data: { turbo_frame: "page_content", turbo_action: "replace" } do %>
+          <i class="fa-solid fa-<%= page.icon %>"></i>
+          <span class="nav-label"><%= page.label %></span>
         <% end %>
       </li>
     <% end %>

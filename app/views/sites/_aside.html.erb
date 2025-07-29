@@ -1,33 +1,22 @@
 <aside>
+  <% if site.aside_image.attached? %>
+    <div 
+      class="profile-pic" 
+      style="background-image: url('<%= url_for(site.aside_image) %>');"
+    ></div>
+  <% end %>
   <div class="info">
     <header>
-      <h1><%= site.title %></h1>
+      <h1><%= site.company_name %></h1>
     </header>
     <ul class="social-icons">
-      <li>
-        <a href="https://github.com/gaudesp" target="_blank">
-          <i class="fab fa-instagram icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/gaudesp/" target="_blank">
-          <i class="fab fa-facebook icon"></i>
-        </a>
-      <li>
-        <a href="https://www.youtube.com/@dj_nokx" target="_blank">
-          <i class="fab fa-tiktok icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.youtube.com/@dj_nokx" target="_blank">
-          <i class="fab fa-youtube icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.youtube.com/@dj_nokx" target="_blank">
-          <i class="fab fa-whatsapp icon"></i>
-        </a>
-      </li>
+      <% site.social_links.order(:position).each do |link| %>
+        <li>
+          <a href="<%= link.url %>" target="_blank" rel="noopener">
+            <i class="<%= link.icon_class %> icon"></i>
+          </a>
+        </li>
+      <% end %>
     </ul>
   </div>
   <div class="aside-buttons">

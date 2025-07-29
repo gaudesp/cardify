@@ -1,5 +1,5 @@
 <article data-controller="site">
-  <section id="<%= @page.slug %>" class="active">
+  <section id="<%= @page.slug %>">
     <turbo-frame id="page_content">
       <%= render partial: "pages/show", locals: { page: @page } %>
     </turbo-frame>
