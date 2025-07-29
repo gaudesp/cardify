@@ -1,0 +1,11 @@
+<nav>
+  <ul>
+    <% site.pages.each do |page| %>
+      <li data-tab="<%= page.slug %>">
+        <%= link_to "/#{site.slug}/#{page.slug}", data: { turbo_frame: "page_content", turbo_action: "replace" } do %>
+          <span class="nav-label"><%= page.title %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

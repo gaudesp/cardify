@@ -1,4 +1,6 @@
-<h2><%= page.title %></h2>
+<header>
+  <h2><span><%= page.title.to_s.first&.upcase %></span> <%= page.title.to_s[1..].lstrip %></h2>
+</header>
 
 <% page.cards.each do |card| %>
   <%= render card %>
