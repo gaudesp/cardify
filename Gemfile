@@ -32,6 +32,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 group :development, :test do
+  gem "faker"
   gem 'dotenv-rails'
   gem "factory_bot_rails", "~> 6.5"
   gem "rspec-rails", "~> 8.0"
