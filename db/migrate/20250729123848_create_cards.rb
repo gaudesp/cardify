@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration[8.0]
       t.references :page, null: false, foreign_key: true, type: :uuid
       t.string :type, null: false
       t.integer :position
-      t.jsonb :metadata, default: {}
+      t.jsonb :setting, default: {}
 
       t.timestamps
     end

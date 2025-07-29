@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_29_123848) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_29_230031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -57,7 +57,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_123848) do
     t.uuid "page_id", null: false
     t.string "type", null: false
     t.integer "position"
-    t.jsonb "metadata", default: {}
+    t.jsonb "setting", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["page_id", "position"], name: "index_cards_on_page_id_and_position"
@@ -67,7 +67,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_123848) do
   create_table "pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "site_id", null: false
     t.string "title", null: false
+    t.string "label", null: false
     t.string "slug", null: false
+    t.string "icon", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -77,14 +79,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_123848) do
 
   create_table "sites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.string "title", null: false
+    t.string "company_name", null: false
     t.string "slug", null: false
+    t.string "phone_number"
+    t.string "contact_email"
     t.boolean "published", default: false
-    t.jsonb "metadata", default: {}
+    t.jsonb "setting", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "slug"], name: "index_sites_on_user_id_and_slug", unique: true
     t.index ["user_id"], name: "index_sites_on_user_id"
+  end
+
+  create_table "social_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "site_id", null: false
+    t.string "platform"
+    t.string "url"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["site_id"], name: "index_social_links_on_site_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -92,6 +106,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_123848) do
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.string "first_name"
+    t.string "last_name"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -104,4 +120,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_123848) do
   add_foreign_key "cards", "pages"
   add_foreign_key "pages", "sites"
   add_foreign_key "sites", "users"
+  add_foreign_key "social_links", "sites"
 end
