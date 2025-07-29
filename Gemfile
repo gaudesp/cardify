@@ -56,3 +56,5 @@ gem "turbo-rails", "~> 2.0"
 gem "stimulus-rails", "~> 1.3"
 
 gem "image_processing", "~> 1.14"
+
+gem "devise", "~> 4.9"
