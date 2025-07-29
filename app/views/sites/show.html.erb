@@ -1,0 +1,22 @@
+<div class="site-layout" data-controller="site">
+  <header class="site-header">
+    <h1><%= @site.title %></h1>
+    <nav>
+      <ul>
+        <% @site.pages.each do |page| %>
+          <li>
+            <%= link_to page.title,
+                        "/#{@site.slug}/#{page.slug}",
+                        data: { turbo_frame: "page_content", turbo_action: "replace" } %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <turbo-frame id="page_content">
+      <%= render partial: "pages/show", locals: { page: @page } %>
+    </turbo-frame>
+  </main>
+</div>
