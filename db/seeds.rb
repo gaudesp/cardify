@@ -15,6 +15,13 @@ site = Site.create!(
   phone_number: "0646786955",
   contact_email: "narostf@gmail.com",
   published: true,
+  setting: {
+    "theme": {
+      "color_primary": "#86d17c",
+      "color_secondary": "#50a2a1",
+      "radius": "10px"
+    }
+  }
 )
 
 site.aside_image.attach(
@@ -24,11 +31,8 @@ site.aside_image.attach(
 )
 
 site.social_links.create!([
-  { platform: "instagram", url: "https://instagram.com/...", position: 1 },
-  { platform: "facebook",  url: "https://facebook.com/...",  position: 2 },
-  { platform: "tiktok",    url: "https://tiktok.com/...",    position: 3 },
-  { platform: "youtube",   url: "https://youtube.com/...",   position: 4 },
-  { platform: "whatsapp",  url: "https://wa.me/...",         position: 5 }
+  { platform: "instagram", url: "https://www.instagram.com/narostreetfood/", position: 1 },
+  { platform: "facebook",  url: "https://www.facebook.com/profile.php?id=100092345660473",  position: 2 }
 ])
 
 page1 = Page.create!(

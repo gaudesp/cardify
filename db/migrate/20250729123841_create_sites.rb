@@ -7,7 +7,13 @@ class CreateSites < ActiveRecord::Migration[8.0]
       t.string :phone_number
       t.string :contact_email
       t.boolean :published, default: false
-      t.jsonb :setting, default: {}
+      t.jsonb :setting, default: {
+        theme: {
+          color_primary: '#86d17c',
+          color_secondary: '#50a2a1',
+          radius: '10px'
+        }
+      }
 
       t.timestamps
     end

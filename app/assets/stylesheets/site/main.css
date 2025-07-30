@@ -53,10 +53,6 @@
   --color-text: #646464;
   --color-text-rgb: 100, 100, 100;
   --color-dark: #323232;
-  --color-primary: #86d17c;
-  --color-primary-rgb: 134, 209, 124;
-  --color-secondary: #50a2a1;
-  --color-secondary-rgb: 80, 162, 161;
   --color-success: #28a745;
   --color-danger: #dc3545;
   --color-info: #17a2b8;
@@ -64,7 +60,6 @@
   --color-grey-dark: #7f7f7f;
   --color-white: #ffffff;
   --font-family: 'Poppins', sans-serif;
-  --radius: 10px;
   --transition: 0.2s;
   --aside-width: 32%;
   --article-width: 68%;
@@ -210,6 +205,7 @@ nav {
   border-radius: var(--radius);
   background: var(--color-white);
   margin-right: 8px;
+  margin-top: 0; /* 1.75rem pour 50% radius */
   z-index: 3;
 }
 nav ul {
@@ -446,7 +442,8 @@ article > * {
   display: flex;
   flex-direction: column;
   width: var(--article-width);
-  height: 100%;
+  height: auto;
+  margin: var(--wrapper-margin-vertical, 0) auto; /* 1.75rem pour 50% radius */
   overflow-x: hidden;
   overflow-y: hidden;
   flex-shrink: 0;

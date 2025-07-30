@@ -84,7 +84,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_230031) do
     t.string "phone_number"
     t.string "contact_email"
     t.boolean "published", default: false
-    t.jsonb "setting", default: {}
+    t.jsonb "setting", default: {"theme"=>{"radius"=>"10px", "color_primary"=>"#86d17c", "color_secondary"=>"#50a2a1"}}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "slug"], name: "index_sites_on_user_id_and_slug", unique: true
