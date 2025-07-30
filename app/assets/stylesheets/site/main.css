@@ -64,6 +64,7 @@
   --aside-width: 32%;
   --article-width: 68%;
 }
+
 /* Menu */
 .card_menu .header {
   padding: 0;
@@ -449,7 +450,6 @@ aside::-webkit-scrollbar {
   display: none;
 }
 aside .info h3 {
-  color: var(--color-primary);
   position: relative;
   text-align: center;
   flex-shrink: 0;
@@ -641,14 +641,14 @@ ul.label li {
 .info strong {
   margin-bottom: 8px;
 }
-.info span {
-  font-size: 14px;
-}
 strong {
   font-weight: 600;
 }
 p {
   margin: 0;
+  padding: 0 0 1rem 0;
+}
+p:last-child {
   padding: 0;
 }
 .trix-content ul {

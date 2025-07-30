@@ -1,16 +1,28 @@
-<nav>
-  <% if user_signed_in? %>
-    <span>Connecté en tant que <%= current_user.email %></span>
-    <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
-  <% else %>
-    <%= link_to "Se connecter", new_user_session_path %>
-  <% end %>
-</nav>
-
-<ul>
-  <% @sites.each do |site| %>
-    <li>
-      <%= link_to site.company_name, site_path(site.slug) %>
-    </li>
-  <% end %>
-</ul>
+<article>
+  <section>
+    <header><h2>
+      <% if user_signed_in? %>
+        <span>M</span>es sites</h2></header>
+      <% else %>
+        <span>À</span> propos</h2></header>
+      <% end %>
+    </h2></header>
+    <div class="container">
+      <div class="col">
+        <% if user_signed_in? %>
+          <ul>
+            <% @sites.each do |site| %>
+              <li>
+                <%= link_to site.company_name, site_path(site.slug) %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Nous sommes une plateforme pensée pour les foodtrucks et petits artisans souhaitant créer facilement leur carte de visite digitale.</p>
+          <p>Sans aucune compétence technique, vous personnalisez votre mini-site en quelques clics : pages, photos, textes, horaires, menus… tout est modulable pour refléter votre activité.</p>
+          <p>Simple, intuitive et parfaitement adaptée au mobile, Cardify vous aide à gagner en visibilité tout en restant 100% autonome.</p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</article>

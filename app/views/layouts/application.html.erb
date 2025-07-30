@@ -10,15 +10,68 @@
 
     <%= yield :head %>
 
+    <style>
+      :root {
+        --color-primary: #86d17c;
+        --color-primary-rgb: 134, 209, 124;
+        --color-secondary: #50a2a1;
+        --color-secondary-rgb: 80, 162, 161;
+        --radius: 10px;
+      }
+
+      .background.gradient {
+        background: linear-gradient(to bottom right, var(--color-secondary) 0%, var(--color-primary) 100%);
+      }
+    </style>
+
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <%= tag.link rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css", integrity: "sha512-...", crossorigin: "anonymous", referrerpolicy: "no-referrer" %>
     <%= stylesheet_link_tag :app %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="background gradient"></div>
+    <main id="appContent">
+      <div class="content">
+        <aside>
+          <div class="info">
+            <header>
+              <h1>Cardify</h1>
+              <h3>
+                <% if user_signed_in? %>
+                  Bienvenue, <span class="primary"><%= current_user.first_name %></span>
+                <% else %>
+                  Votre <span class="primary">carte de visite</span> digitale
+                <% end %>
+              </h3>
+            </header>
+          </div>
+          <div class="aside-buttons">
+            <% if user_signed_in? %>
+              <%= link_to edit_user_registration_path, class: "aside-btn" do %>
+                <i class="fa-solid fa-gear"></i> Paramètre
+              <% end %>
+              <%= link_to destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "aside-btn" do %>
+                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+              <% end %>
+            <% else %>
+              <%= link_to new_user_session_path, class: "aside-btn" do %>
+                <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+              <% end %>
+              <%= link_to new_user_registration_path, class: "aside-btn" do %>
+                <i class="fa-solid fa-user-plus"></i> S'inscrire
+              <% end %>
+            <% end %>
+          </div>
+        </aside>
+        <div class="wrapper">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
