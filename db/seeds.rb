@@ -17,8 +17,9 @@ site = Site.create!(
   published: true,
   setting: {
     "theme": {
-      "color_primary": "#86d17c",
-      "color_secondary": "#50a2a1",
+      "color_primary": "#e36254",
+      "color_secondary": "#f5d76e",
+      "background_gradient": "top right",
       "radius": "10px"
     }
   }

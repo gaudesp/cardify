@@ -11,6 +11,7 @@ class CreateSites < ActiveRecord::Migration[8.0]
         theme: {
           color_primary: '#86d17c',
           color_secondary: '#50a2a1',
+          background_gradient: 'bottom right',
           radius: '10px'
         }
       }
