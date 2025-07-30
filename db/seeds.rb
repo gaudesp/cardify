@@ -17,8 +17,8 @@ site = Site.create!(
   published: true,
   setting: {
     "theme": {
-      "color_primary": "#e36254",
-      "color_secondary": "#f5d76e",
+      "color_primary": "#82ced2",
+      "color_secondary": "#7fb083",
       "background_gradient": "top right",
       "radius": "10px"
     }
@@ -36,7 +36,7 @@ site.social_links.create!([
   { platform: "facebook",  url: "https://www.facebook.com/profile.php?id=100092345660473",  position: 2 }
 ])
 
-page1 = Page.create!(
+page_info = Page.create!(
   site: site,
   title: "A propos",
   label: "info",
@@ -44,7 +44,7 @@ page1 = Page.create!(
   position: 1
 )
 
-page2 = Page.create!(
+page_menu = Page.create!(
   site: site,
   title: "Notre carte",
   label: "menu",
@@ -52,51 +52,64 @@ page2 = Page.create!(
   position: 2
 )
 
-CardContent.create!(
-  page: page1,
+card_info = CardContent.create!(
+  page: page_info,
   position: 1,
   content: """
   <p>
-  Arancinis croustillants, tiramisus maison, panettones artisanaux… Ici, tout est préparé avec passion, à partir de produits de qualité et d’un savoir-faire transmis avec le cœur.
+  Foodtruck spécialisé en arancini, basé dans le Pas-de-Calais.
   </p>
 
   <p>
-  Inspirée des traditions siciliennes et pensée pour la rue, cette cuisine voyage de marché en marché, d’événement en événement, pour vous offrir une pause gourmande, conviviale et authentique.
+  Chaque recette est préparée maison, à base de produits locaux soigneusement sélectionnés, pour vous offrir une cuisine authentique, généreuse et pleine de caractère.
   </p>
 
   <p>
-  Sur place ou à emporter, pour un déjeuner rapide ou une fête entre amis, chaque bouchée raconte une histoire : celle de la générosité, du goût, et du plaisir simple de bien manger.
-  </p>
-
-  <p>
-  Découvrez le menu, suivez le camion… et laissez-vous surprendre 🍽️
+  Retrouvez-nous régulièrement sur les marchés et événements de la région, et laissez-vous tenter par une pause gourmande aux saveurs de la Sicile.
   </p>
   """
 )
 
-CardContent.create!(
-  page: page2,
+card_menu = CardMenu.create!(
+  page: page_menu,
+  position: 2
+)
+
+arancini = card_menu.card_menu_categories.create!(
+  title: "Plats",
   position: 1,
-  content: """
-  <h3>🍽️ Arancini</h3>
-  <ul>
-    <li><strong>Arancini</strong> <em>(bolo, poulet, mortadelle, végé, thon)</em> — <strong>4,50 €</strong></li>
-    <li><strong>Arancini Piccolo</strong> <em>(bolo, poulet, mortadelle, végé, thon)</em> — <strong>2,50 €</strong></li>
-  </ul>
+  card_menu_items_attributes: [
+    { title: "Arancini", ingredients: "bolo, poulet, mortadelle, végé, thon", price: 4.50, position: 1 },
+    { title: "Arancini Piccolo", ingredients: "bolo, poulet, mortadelle, végé, thon", price: 2.50, position: 2 }
+  ]
+)
 
-  <h3>🍰 Desserts</h3>
-  <ul>
-    <li><strong>Tiramisu</strong> <em>(café, speculoos, chocolat blanc, nutella)</em> — <strong>3,50 €</strong></li>
-    <li><strong>Panettone</strong> 100 gr <em>(en supp pour formule)</em> — <strong>5,00 €</strong></li>
-    <li><strong>Panettone</strong> boîte métal 750 gr — <strong>28,00 €</strong></li>
-  </ul>
+desserts = card_menu.card_menu_categories.create!(
+  title: "Desserts",
+  position: 2,
+  card_menu_items_attributes: [
+    { title: "Tiramisu", ingredients: "café, speculoos, chocolat blanc, nutella", price: 3.50, position: 1 },
+    { title: "Panettone 100 gr", subtitle: "en supp pour formule", price: 5.00, position: 2 },
+    { title: "Panettone boîte métal 750 gr", price: 28.00, position: 3 }
+  ]
+)
 
-  <h3>🥤 Boissons</h3>
-  <ul>
-    <li>Limonade de Sicile, San Pellegrino — <strong>1,50 €</strong></li>
-    <li>Bière italienne — <strong>3,50 €</strong></li>
-    <li>Chianti 37,5 cl — <strong>5,50 €</strong></li>
-    <li>Chianti 50 cl — <strong>6,90 €</strong></li>
-  </ul>
-  """
+boissons = card_menu.card_menu_categories.create!(
+  title: "Boissons",
+  position: 3,
+  card_menu_items_attributes: [
+    { title: "Limonade de Sicile", price: 1.50, position: 1 },
+    { title: "San Pellegrino", price: 1.50, position: 2 },
+    { title: "Bière italienne", price: 3.50, position: 3 },
+    { title: "Chianti 37,5 cl", price: 5.50, position: 4 },
+    { title: "Chianti 50 cl", price: 6.90, position: 5 }
+  ]
+)
+
+formules = card_menu.card_menu_categories.create!(
+  title: "Formules",
+  position: 4,
+  card_menu_items_attributes: [
+    { title: "1 Arancini + 1 Dessert + 1 Boisson (soft)", price: 9.00, position: 1 }
+  ]
 )

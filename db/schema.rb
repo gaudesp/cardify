@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_29_230031) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_30_101209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -53,6 +53,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_230031) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "card_menu_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "card_menu_id", null: false
+    t.string "title", null: false
+    t.string "subtitle"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_menu_id", "position"], name: "index_card_menu_categories_on_card_menu_id_and_position"
+    t.index ["card_menu_id"], name: "index_card_menu_categories_on_card_menu_id"
+  end
+
+  create_table "card_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "card_menu_category_id", null: false
+    t.string "title", null: false
+    t.string "subtitle"
+    t.text "ingredients"
+    t.decimal "price", precision: 8, scale: 2
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_menu_category_id", "position"], name: "index_card_menu_items_on_card_menu_category_id_and_position"
+    t.index ["card_menu_category_id"], name: "index_card_menu_items_on_card_menu_category_id"
+  end
+
   create_table "cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "page_id", null: false
     t.string "type", null: false
@@ -93,11 +117,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_230031) do
 
   create_table "social_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "site_id", null: false
-    t.string "platform"
-    t.string "url"
+    t.string "platform", null: false
+    t.string "url", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["site_id", "position"], name: "index_social_links_on_site_id_and_position"
     t.index ["site_id"], name: "index_social_links_on_site_id"
   end
 
@@ -117,6 +142,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_230031) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "card_menu_categories", "cards", column: "card_menu_id"
+  add_foreign_key "card_menu_items", "card_menu_categories"
   add_foreign_key "cards", "pages"
   add_foreign_key "pages", "sites"
   add_foreign_key "sites", "users"

@@ -61,3 +61,5 @@ gem "stimulus-rails", "~> 1.3"
 gem "image_processing", "~> 1.14"
 
 gem "devise", "~> 4.9"
+
+gem "acts_as_list", "~> 1.2"

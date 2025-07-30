@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="col">
+    <% card_menu.card_menu_categories.each do |category| %>
+      <div class="card_menu">
+        <div class="header">
+          <h3><%= category.title %></h3>
+          <% if category.subtitle.present? %>
+            – <div class="subtitle"><%= category.subtitle %></div>
+          <% end %>
+        </div>
+
+        <% category.card_menu_items.each do |item| %>
+          <div class="item">
+            <div class="info">
+              <div class="title-line">
+                <h4 class="title"><%= item.title %></h4>
+                <% if item.subtitle.present? %>
+                  <div class="subtitle">– <%= item.subtitle %></div>
+                <% end %>
+              </div>
+              <% ingredients = ingredients_to_tags(item.ingredients) %>
+              <% if ingredients.any? %>
+                <div class="tags">
+                  <% ingredients.each do |ingredient| %>
+                    <span><%= ingredient %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <div class="price">
+              <% if item.price.present? %>
+                <div class="label"><strong><%= number_to_currency(item.price, unit: "€", separator: ",", delimiter: " ") %></strong></div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
