@@ -100,7 +100,7 @@
   margin: 0;
 }
 .card_menu .item .title {
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-dark);
   margin: 0;
 }
@@ -689,7 +689,7 @@ h2 {
   font-size: 20px;
 }
 h3 {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 18px;
 }
 h4 {
