@@ -63,3 +63,5 @@ gem "image_processing", "~> 1.14"
 gem "devise", "~> 4.9"
 
 gem "acts_as_list", "~> 1.2"
+
+gem "tailwindcss-rails", "~> 4.3"

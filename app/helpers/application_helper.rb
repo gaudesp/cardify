@@ -25,6 +25,9 @@ module ApplicationHelper
           margin-top: 64px!important;
           border-radius: 0!important;
         }
+        aside .info {
+          margin: 0!important;
+        }
       }
     CSS
   end
