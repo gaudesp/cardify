@@ -59,7 +59,10 @@ export default class extends Controller {
     this.updateNav(slug)
     this.currentSlug = slug
 
-    setTimeout(() => this.manualScroll = false, 500)
+    setTimeout(() => {
+      this.manualScroll = false
+      this._onScroll()
+    }, 500)
   }
 
   _onScroll() {
