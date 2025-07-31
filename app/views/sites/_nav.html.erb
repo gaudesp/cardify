@@ -1,13 +1,22 @@
-<nav data-controller="nav">
+<nav
+  data-controller="<%= @is_mobile ? 'scroll' : 'nav' %>"
+  <% if @is_mobile %> data-scroll-site-value="<%= site.slug %>" <% end %>
+>
   <ul>
     <% site.pages.each do |page| %>
       <li
-        data-nav-target="item"
+        data-<%= @is_mobile ? 'scroll' : 'nav' %>-target="item"
         data-tab="<%= page.slug %>"
       >
         <%= link_to "/#{site.slug}/#{page.slug}",
           class: "nav-link",
-          data: { turbo_frame: "page_content", turbo_action: "replace" } do %>
+          data: {
+            action: (@is_mobile ? "scroll#scrollToSection" : nil),
+            tab: page.slug,
+            turbo: (@is_mobile ? "false" : nil), # ✅ Turbo désactivé uniquement en mobile
+            turbo_frame: (@is_mobile ? nil : "page_content"),
+            turbo_action: (@is_mobile ? nil : "replace")
+          }.compact do %>
           <i class="fa-solid fa-<%= page.icon %>"></i>
           <span class="nav-label"><%= page.label %></span>
         <% end %>

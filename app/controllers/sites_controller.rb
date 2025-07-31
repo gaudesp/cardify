@@ -3,12 +3,18 @@ class SitesController < ApplicationController
   layout "site"
 
   def show
-    @page =
-      if params[:page_slug]
-        @site.pages.find_by!(slug: params[:page_slug])
-      else
-        @site.pages.first!
-      end
+    @is_mobile = mobile_device?
+
+    if @is_mobile
+      @pages = @site.pages.order(:position)
+    else
+      @page =
+        if params[:page_slug]
+          @site.pages.find_by!(slug: params[:page_slug])
+        else
+          @site.pages.first!
+        end
+    end
 
     respond_to do |format|
       format.html
@@ -17,6 +23,10 @@ class SitesController < ApplicationController
   end
 
   private
+
+    def mobile_device?
+      request.user_agent =~ /Mobile|webOS/
+    end
 
     def set_site
       @site = Site.includes(:pages, pages: :cards).find_by!(slug: params[:site_slug])
