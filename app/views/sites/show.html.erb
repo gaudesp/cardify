@@ -1,4 +1,4 @@
-<article data-controller="<%= @is_mobile ? 'scroll' : 'site' %>">
+<article>
   <% if @is_mobile %>
     <% @pages.each do |page| %>
       <section data-scroll-target="section" data-slug="<%= page.slug %>" id="<%= page.slug %>">

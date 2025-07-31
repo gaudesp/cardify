@@ -6,49 +6,110 @@ export default class extends Controller {
   static values = { site: String }
 
   connect() {
-    if (window.innerWidth < 1100) {
-      this.observer = new IntersectionObserver(this.onIntersect.bind(this), {
-        root: null,
-        threshold: 0.6
-      })
+    if (window.innerWidth >= 1100) return
 
-      this.sectionTargets.forEach(section => this.observer.observe(section))
+    this.navHeight = document.querySelector("nav")?.offsetHeight || 0
+    this.currentSlug = null
+    this.manualScroll = false
+    this.scrollTopBtn = document.getElementById("scrollTopBtn")
 
-      const pathParts = window.location.pathname.split("/")
-      const slug = pathParts[2]
-      if (slug) {
+    this._onScroll = this._onScroll.bind(this)
+    this._onScrollTopClick = this._onScrollTopClick.bind(this)
+
+    window.addEventListener("scroll", this._onScroll)
+    if (this.scrollTopBtn) {
+      this.scrollTopBtn.addEventListener("click", this._onScrollTopClick)
+    }
+
+    const slug = window.location.pathname.split("/")[2]
+    if (slug) {
+      const section = this.sectionTargets.find(s => s.dataset.slug === slug)
+      if (section) {
+        this.manualScroll = true
+        section.scrollIntoView({ behavior: "auto" })
         this.updateNav(slug)
-        const section = document.querySelector(`section[data-slug="${slug}"]`)
-        if (section) section.scrollIntoView({ behavior: "auto" })
+        this.currentSlug = slug
+        setTimeout(() => {
+          this.manualScroll = false
+          this._onScroll() // 👈 forcer mise à jour après scroll automatique
+        }, 300)
+        return // 👈 éviter double appel à _onScroll juste après
       }
     }
+
+    this._onScroll() // 👈 cas normal sans slug
   }
 
   disconnect() {
-    if (this.observer) this.observer.disconnect()
+    window.removeEventListener("scroll", this._onScroll)
+    if (this.scrollTopBtn) {
+      this.scrollTopBtn.removeEventListener("click", this._onScrollTopClick)
+    }
   }
 
   scrollToSection(event) {
     event.preventDefault()
-
     const slug = event.currentTarget.dataset.tab
-    const section = document.querySelector(`section[data-slug="${slug}"]`)
-    if (section) section.scrollIntoView({ behavior: "smooth" })
+    const section = this.sectionTargets.find(s => s.dataset.slug === slug)
+    if (!section) return
 
-    const newPath = `/${this.siteValue}/${slug}`
-    history.replaceState({}, "", newPath)
+    this.manualScroll = true
+    section.scrollIntoView({ behavior: "smooth" })
+    history.replaceState({}, "", `/${this.siteValue}/${slug}`)
     this.updateNav(slug)
+    this.currentSlug = slug
+
+    setTimeout(() => this.manualScroll = false, 500)
   }
 
-  onIntersect(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const slug = entry.target.dataset.slug
-        const fullPath = `/${this.siteValue}/${slug}`
-        history.replaceState({}, "", fullPath)
-        this.updateNav(slug)
+  _onScroll() {
+    if (this.manualScroll) return
+
+    const firstSection = this.sectionTargets[0]
+    if (!firstSection) return
+
+    const firstTop = firstSection.getBoundingClientRect().top
+    this._toggleScrollButton()
+
+    if (firstTop > this.navHeight) {
+      if (this.currentSlug !== null) {
+        history.replaceState({}, "", `/${this.siteValue}`)
+        this.updateNav(null)
+        this.currentSlug = null
       }
-    })
+      return
+    }
+
+    for (const section of this.sectionTargets) {
+      const { top, bottom } = section.getBoundingClientRect()
+      const slug = section.dataset.slug
+
+      if (top <= this.navHeight && bottom > this.navHeight) {
+        if (slug !== this.currentSlug) {
+          history.replaceState({}, "", `/${this.siteValue}/${slug}`)
+          this.updateNav(slug)
+          this.currentSlug = slug
+        }
+        return
+      }
+    }
+  }
+
+  _toggleScrollButton() {
+    if (!this.scrollTopBtn) return
+    const shouldShow = window.scrollY > 100
+    this.scrollTopBtn.classList.toggle("show", shouldShow)
+  }
+
+  _onScrollTopClick(event) {
+    event.preventDefault()
+    this.manualScroll = true
+    if (this.scrollTopBtn) this.scrollTopBtn.classList.remove("show")
+    this.updateNav(null)
+    history.replaceState({}, "", `/${this.siteValue}`)
+    this.currentSlug = null
+    window.scrollTo({ top: 0, behavior: "smooth" })
+    setTimeout(() => this.manualScroll = false, 500)
   }
 
   updateNav(slug) {

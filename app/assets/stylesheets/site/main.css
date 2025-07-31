@@ -658,6 +658,9 @@ p:last-child {
 .trix-content p {
   margin-bottom: 1rem;
 }
+.trix-content p:last-child {
+  margin-bottom: 0;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -1205,6 +1208,9 @@ h4 {
       var(--color-border),
       var(--color-white)
     ) 1;
+  }
+  section:last-child {
+    padding-bottom: 50px;
   }
   main {
     width: 100%;

@@ -1,7 +1,4 @@
-<nav
-  data-controller="<%= @is_mobile ? 'scroll' : 'nav' %>"
-  <% if @is_mobile %> data-scroll-site-value="<%= site.slug %>" <% end %>
->
+<nav>
   <ul>
     <% site.pages.each do |page| %>
       <li
