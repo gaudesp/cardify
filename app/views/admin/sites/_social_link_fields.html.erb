@@ -1,0 +1,21 @@
+<div data-nested-form-target="item" class="mb-4 border rounded p-4 bg-gray-50">
+  <%= f.hidden_field :_destroy %>
+
+  <div class="float-right">
+    <button type="button"
+            data-action="nested-form#remove"
+            class="text-sm text-red-500 hover:underline">✕ Supprimer</button>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :platform, "Plateforme", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.select :platform, SocialLink::ICONS.keys.map { |k| [k.to_s.titleize, k] },
+                 include_blank: true,
+                 class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :url, "URL", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.url_field :url, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+  </div>
+</div>

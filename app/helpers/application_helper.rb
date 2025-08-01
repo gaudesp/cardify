@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def nested_form_builder_for(object, association, index)
+    ActionView::Helpers::FormBuilder.new(
+      "site[#{association}_attributes][#{index}]",
+      object,
+      self,
+      {}
+    )
+  end
   def app_theme_css()
     <<~CSS.html_safe
       :root {

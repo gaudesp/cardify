@@ -235,6 +235,9 @@
 }
 
 /* Base Styles */
+.float-right {
+  float: right;
+}
 input, textarea {
   font-size: 16px;
 }

@@ -1,4 +1,3 @@
-
 class Admin::SitesController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!
@@ -10,7 +9,7 @@ class Admin::SitesController < ApplicationController
 
   def update
     if @site.update(site_params)
-      redirect_to admin_edit_site_path(@site), notice: "Site updated successfully"
+      redirect_to admin_edit_site_path(@site), notice: "Site updated"
     else
       render :edit, status: :unprocessable_entity
     end

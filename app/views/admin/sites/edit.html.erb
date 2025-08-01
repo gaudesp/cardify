@@ -34,27 +34,24 @@
       <%= f.file_field :aside_image, class: "mt-1 block w-full", direct_upload: true %>
     </div>
 
-    <h3 class="mt-6 mb-2 text-lg font-semibold">Réseaux sociaux</h3>
-    <%= f.fields_for :social_links do |sl| %>
-      <div class="mb-4 border rounded p-4 bg-gray-50">
-        <div class="mb-2">
-          <%= sl.label :platform, "Plateforme", class: "block text-sm font-medium text-gray-700" %>
-          <%= sl.select :platform, SocialLink::ICONS.keys.map { |k| [k.to_s.titleize, k] },
-                        include_blank: true,
-                        class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
-        </div>
+    <div data-controller="nested-form" data-nested-form-association-value="social_links">
+      <button type="button"
+        data-action="nested-form#add"
+        class="float-right text-sm text-blue-600 hover:underline">+ Ajouter un lien</button>
+          
+      <h3 class="mt-6 mb-2 text-lg font-semibold">Réseaux sociaux</h3>
 
-        <div class="mb-2">
-          <%= sl.label :url, "URL", class: "block text-sm font-medium text-gray-700" %>
-          <%= sl.url_field :url, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
-        </div>
-
-        <div class="flex items-center">
-          <%= sl.check_box :_destroy, class: "mr-2" %>
-          <%= sl.label :_destroy, "Supprimer ce lien", class: "text-sm text-red-600" %>
-        </div>
+      <div data-nested-form-target="list">
+        <%= f.fields_for :social_links do |sl| %>
+          <%= render "admin/sites/social_link_fields", f: sl %>
+        <% end %>
       </div>
-    <% end %>
+
+      <template data-nested-form-target="template">
+        <%= render "admin/sites/social_link_fields",
+            f: nested_form_builder_for(Site.new.social_links.build, 'social_links', 'NEW_RECORD') %>
+      </template>
+    </div>
 
     <div class="flex">
       <%= f.submit "Sauvegarder", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
