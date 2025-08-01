@@ -1,28 +1,18 @@
-require "faker"
-
-Faker::UniqueGenerator.clear
-
 user = User.create!(
-  email: "enzo@gmail.com",
+  email: "gaudesp@gmail.com",
   password: "password",
   password_confirmation: "password",
-  first_name: "Enzo"
+  first_name: "Gauthier",
+  last_name: "Desplanque"
 )
 
+# Naro'StreetFood
 site = Site.create!(
   user: user,
   company_name: "Naro'StreetFood",
   phone_number: "0646786955",
   contact_email: "narostf@gmail.com",
-  published: true,
-  setting: {
-    "theme": {
-      "color_primary": "#82ced2",
-      "color_secondary": "#7fb083",
-      "background_gradient": "top right",
-      "radius": "10px"
-    }
-  }
+  published: true
 )
 
 site.aside_image.attach(
@@ -89,8 +79,8 @@ desserts = card_menu.card_menu_categories.create!(
   position: 2,
   card_menu_items_attributes: [
     { title: "Tiramisu", ingredients: "café, speculoos, chocolat blanc, nutella", price: 3.50, position: 1 },
-    { title: "Panettone 100 gr", subtitle: "en supp pour formule", price: 5.00, position: 2 },
-    { title: "Panettone boîte métal 750 gr", price: 28.00, position: 3 }
+    { title: "Panettone", ingredients: "100 gr", subtitle: "en supp pour formule", price: 5.00, position: 2 },
+    { title: "Panettone", ingredients: "750 gr, boîte métal", price: 28.00, position: 3 }
   ]
 )
 
@@ -111,5 +101,105 @@ formules = card_menu.card_menu_categories.create!(
   position: 4,
   card_menu_items_attributes: [
     { title: "1 Arancini + 1 Dessert + 1 Boisson (soft)", price: 9.00, position: 1 }
+  ]
+)
+
+# Pizza Kea
+site = Site.create!(
+  user: user,
+  company_name: "Pizza Kea",
+  phone_number: "0780977831",
+  contact_email: "pizzakea@gmail.com",
+  published: true
+)
+
+site.aside_image.attach(
+  io: File.open(Rails.root.join("db/seeds/images/aside2.jpg")),
+  filename: "aside2.jpg",
+  content_type: "image/jpeg"
+)
+
+site.social_links.create!([
+  { platform: "facebook",  url: "https://www.facebook.com/profile.php?id=100063543250793",  position: 1 }
+])
+
+page_info = Page.create!(
+  site: site,
+  title: "A propos",
+  label: "info",
+  icon: "info-circle",
+  position: 1
+)
+
+page_menu = Page.create!(
+  site: site,
+  title: "Notre carte",
+  label: "menu",
+  icon: "utensils",
+  position: 2
+)
+
+card_info = CardContent.create!(
+  page: page_info,
+  position: 1,
+  content: """
+  <p>
+  Foodtruck spécialisé en pizza, basé dans le Pas-de-Calais.
+  </p>
+
+  <p>
+  Je vous propose des Pizzas cuites au feu de bois dans l'esprit des produits locaux, la Welsh avec son cheddar en passant par la Ch'ti au parfum du maroilles.
+  </p>
+
+  <p>
+  Venez déguster d'autres recettes en base tomate ou crème. N'oubliez pas de passer vos commandes !
+  </p>
+  """
+)
+
+card_menu = CardMenu.create!(
+  page: page_menu,
+  position: 2
+)
+
+tomate = card_menu.card_menu_categories.create!(
+  title: "Base Tomate",
+  position: 1,
+  card_menu_items_attributes: [
+    { title: "Margarita", ingredients: "Mozzarella, Emmental, Olives noires", price: 9.50, position: 1 },
+    { title: "Royale", ingredients: "Jambon blanc, Champignon blanc, Œuf, Mozzarella, Emmental, Olives noires", price: 11.50, position: 2 },
+    { title: "Ch’ti", ingredients: "Jambon cru, Maroilles, Mozzarella, Emmental, Olives noires", price: 13.50, position: 3 },
+    { title: "Sicilienne (anchois)", ingredients: "Filets d’anchois à l’huile, Mozzarella, Emmental, Olives noires", price: 12.50, position: 4 },
+    { title: "Charcutière", ingredients: "Jambon blanc, Chorizo, Lardons fumés, Œuf, Mozzarella, Emmental, Olives noires", price: 12.50, position: 5 },
+    { title: "Peppéroni", ingredients: "Peppéroni, Mozzarella, Emmental, Olives noires", price: 12.00, position: 6 },
+    { title: "Végétarienne", ingredients: "Champignon blanc, Oignon, Aubergine, Tomate confite, Poivron, Mozzarella, Emmental, Olives noires", price: 11.50, position: 7 },
+    { title: "Basquaise", ingredients: "Filet de poulet, Poivron, Champignon blanc, Oignon, Mozzarella, Emmental, Olives noires", price: 12.50, position: 8 },
+    { title: "Rustique", ingredients: "Jambon blanc, Lardons fumés, Œuf, Mozzarella, Emmental, Olives noires", price: 11.50, position: 9 },
+    { title: "Pizza Kea", ingredients: "Chorizo, Champignon blanc, Œuf, Mozzarella, Emmental, Olives noires", price: 11.50, position: 10 }
+  ]
+)
+
+creme = card_menu.card_menu_categories.create!(
+  title: "Base Crème",
+  position: 2,
+  card_menu_items_attributes: [
+    { title: "Paysanne", ingredients: "Lardons fumés, Pomme de terre, Oignons, Œuf, Mozzarella, Emmental, Olives noires", price: 11.50, position: 1 },
+    { title: "5 Fromages", ingredients: "Roquefort, Cheddar, Fromage à raclette, Mozzarella, Emmental, Olives noires", price: 13.50, position: 2 },
+    { title: "Welsh", ingredients: "Jambon blanc, Cheddar, Œuf, Mozzarella, Emmental, Olives noires", price: 12.50, position: 3 },
+    { title: "Curry", ingredients: "Filet de poulet, Pomme de terre, Poivron, Mozzarella, Emmental, Olives noires", price: 12.50, position: 4 },
+    { title: "Carbonara", ingredients: "Lardons fumés, Champignon blanc, Parmesan, Oignon, Œuf, Mozzarella, Emmental, Olives noires", price: 12.50, position: 5 },
+    { title: "Zapiekanka (Polonaise)", ingredients: "Metka, Pomme de terre, Oignons, Ketchup, Mozzarella, Emmental, Olives noires", price: 13.00, position: 6 },
+    { title: "Biquette", ingredients: "Chèvre, Miel, Noix, Thym, Mozzarella, Emmental, Olives noires", price: 12.00, position: 7 },
+    { title: "Normande", ingredients: "Camembert, Lardons fumés, Oignons, Mozzarella, Emmental, Olives noires", price: 12.50, position: 8 },
+    { title: "Forestière", ingredients: "Champignon blanc, Lardons fumés, Oignons, Mozzarella, Emmental, Olives noires", price: 12.00, position: 9 },
+    { title: "Raclette", ingredients: "Jambon blanc, Chorizo, Fromage à raclette, Pomme de terre, Jambon cru, Mozzarella, Emmental, Olives noires", price: 14.00, position: 10 }
+  ]
+)
+
+boissons = card_menu.card_menu_categories.create!(
+  title: "Supplément",
+  position: 3,
+  card_menu_items_attributes: [
+    { title: "Ingrédient supplémentaire", price: 2.00, position: 1 }
   ]
 )
