@@ -1,4 +1,15 @@
 module SitesHelper
+  def site_status_badge(site)
+    bg_color = site.published? ? "bg-green-500" : "bg-red-500"
+    text_color = site.published? ? "text-green-600" : "text-red-600"
+    label = site.published? ? "En ligne" : "Hors ligne"
+
+    content_tag(:span, class: "inline-flex items-center gap-2 text-sm #{text_color}") do
+      concat content_tag(:span, "", class: "inline-block w-3 h-3 rounded-full #{bg_color}")
+      concat content_tag(:span, label)
+    end
+  end
+
   def site_theme_css_vars(site)
     theme = site.setting["theme"] || {}
     primary = theme["color_primary"] || "#86d17c"

@@ -1,0 +1,64 @@
+<article><section>
+<%= render "shared/visit_button", site: @site %>
+<header>
+  <h2><span>C</span>onfiguration du site</h2>
+  <%= link_to "⟵ Retour", admin_sites_path, class: "text-sm text-gray-600 hover:underline" %>
+</header>
+<div class="container"><div class="col">
+
+  <%= render "shared/error_messages", resource: @site %>
+
+  <%= form_with model: [:admin, @site], local: true do |f| %>
+    <div class="mb-4">
+      <%= f.label :company_name, "Nom de l'entreprise", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :company_name, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+    </div>
+    
+    <div class="mb-4">
+      <%= f.label :contact_email, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.email_field :contact_email, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :phone_number, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.telephone_field :phone_number, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :published, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.check_box :published, class: "mt-1" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :aside_image, "Image latérale", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.file_field :aside_image, class: "mt-1 block w-full", direct_upload: true %>
+    </div>
+
+    <h3 class="mt-6 mb-2 text-lg font-semibold">Réseaux sociaux</h3>
+    <%= f.fields_for :social_links do |sl| %>
+      <div class="mb-4 border rounded p-4 bg-gray-50">
+        <div class="mb-2">
+          <%= sl.label :platform, "Plateforme", class: "block text-sm font-medium text-gray-700" %>
+          <%= sl.select :platform, SocialLink::ICONS.keys.map { |k| [k.to_s.titleize, k] },
+                        include_blank: true,
+                        class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+        </div>
+
+        <div class="mb-2">
+          <%= sl.label :url, "URL", class: "block text-sm font-medium text-gray-700" %>
+          <%= sl.url_field :url, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+        </div>
+
+        <div class="flex items-center">
+          <%= sl.check_box :_destroy, class: "mr-2" %>
+          <%= sl.label :_destroy, "Supprimer ce lien", class: "text-sm text-red-600" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="flex">
+      <%= f.submit "Sauvegarder", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
+    </div>
+  <% end %>
+
+</div></div></section></article>

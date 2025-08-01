@@ -587,6 +587,19 @@ article header:empty {
   padding: 0;
 }
 
+.visit {
+  float: right;
+  padding: 11px 2rem;
+  align-items: center;
+  font-size: 2rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.visit:hover {
+  color: var(--color-primary);
+}
+
 /* Utilities */
 .label a:hover {
   color: var(--color-primary);
@@ -671,8 +684,8 @@ h5 {
   color: var(--color-dark);
   margin: 0;
 }
-h2 span,
-h3 span {
+section h2 span,
+section h3 span {
   color: var(--color-primary);
 }
 h1 {

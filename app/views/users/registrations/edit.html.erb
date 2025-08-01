@@ -5,7 +5,7 @@
 </header>
 <div class="container"><div class="col">
 
-  <%= render "users/shared/error_messages", resource: resource %>
+  <%= render "shared/error_messages", resource: resource %>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <div class="mb-4">

@@ -11,7 +11,7 @@
     <%= yield :head %>
 
     <style>
-      <%= app_theme_css() unless @site.present? %>
+      <%= app_theme_css() %>
     </style>
 
     <link rel="icon" href="/icon.png" type="image/png">
@@ -31,31 +31,16 @@
         <aside>
           <div class="info">
             <header>
-              <h1>Cardify</h1>
-              <h3>
-                <% if user_signed_in? %>
-                  Bienvenue, <span class="primary"><%= current_user.first_name %></span>
-                <% else %>
-                  Votre <span class="primary">carte de visite</span> digitale
-                <% end %>
-              </h3>
+              <h1><%= @site.company_name %></h1>
+              <h3><%= site_status_badge(@site) %></h3>
             </header>
           </div>
           <div class="aside-buttons">
-            <% if user_signed_in? %>
-              <%= link_to edit_user_registration_path, class: "aside-btn" do %>
-                <i class="fa-solid fa-user"></i> Paramètres
-              <% end %>
-              <%= link_to destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "aside-btn" do %>
-                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
-              <% end %>
-            <% else %>
-              <%= link_to new_user_session_path, class: "aside-btn" do %>
-                <i class="fa-solid fa-right-to-bracket"></i> Se connecter
-              <% end %>
-              <%= link_to new_user_registration_path, class: "aside-btn" do %>
-                <i class="fa-solid fa-user-plus"></i> S'inscrire
-              <% end %>
+            <%= link_to admin_edit_site_path, class: "aside-btn" do %>
+              <i class="fa-solid fa-gear"></i> Configuration
+            <% end %>
+            <%= link_to root_path, class: "aside-btn" do %>
+              <i class="fa-solid fa-arrow-left"></i> Quitter
             <% end %>
           </div>
         </aside>
