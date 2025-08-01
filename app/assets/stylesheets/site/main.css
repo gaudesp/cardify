@@ -68,13 +68,9 @@
 /* Menu */
 .card_menu .header {
   padding: 0;
-  border-bottom: 1px solid transparent;
-  border-image: linear-gradient(to right, var(--color-white), var(--color-border), var(--color-white)) 1;
-  padding-bottom: 20px;
   display: flex;
   align-items: baseline;
   justify-content: center;
-  margin-bottom: 1rem;
 }
 .card_menu .header h3 {
   margin-right: 5px;
@@ -88,10 +84,15 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin-bottom: 5px;
+  border-bottom: 1px solid var(--color-border);
+  padding: 5px 0 5px 0;
 }
-.card_menu .item:last-child {
-  margin-bottom: 10px;
+.card_menu .item:nth-of-type(2) {
+  padding-top: 1rem;
+}
+.card_menu .item:last-of-type {
+  border-bottom: none;
+  padding-bottom: 1rem;
 }
 .card_menu .item .label {
   font-size: 0.85rem;
