@@ -10,12 +10,12 @@ class Site < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
 
   validates :contact_email,
-    presence: true,
-    format: { with: URI::MailTo::EMAIL_REGEXP, message: "is invalid" }
+    format: { with: URI::MailTo::EMAIL_REGEXP, message: "is invalid" },
+    allow_blank: true
 
   validates :phone_number,
-    presence: true,
-    format: { with: /\A\+?[0-9\s\-().]{7,20}\z/, message: "is invalid" }
+    format: { with: /\A\+?[0-9\s\-().]{7,20}\z/, message: "is invalid" },
+    allow_blank: true
   
   before_save :normalize_radius
 
