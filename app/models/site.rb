@@ -4,9 +4,10 @@ class Site < ApplicationRecord
   has_many :social_links, dependent: :destroy
   has_one_attached :aside_image
 
-  accepts_nested_attributes_for :social_links, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :social_links, allow_destroy: true
 
   before_validation :generate_slug
+  validates :company_name, presence: true, uniqueness: true
   validates :slug, presence: true, uniqueness: true
 
   validates :contact_email,
@@ -26,7 +27,7 @@ class Site < ApplicationRecord
   private
 
   def generate_slug
-    return unless new_record? || company_name_changed?
+    return unless (new_record? || company_name_changed?) && company_name.present?
 
     self.slug = company_name.to_s.parameterize
   end

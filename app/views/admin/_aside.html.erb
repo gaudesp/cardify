@@ -1,0 +1,16 @@
+<aside>
+  <div class="info">
+    <header>
+      <h1><%= site.company_name_was %></h1>
+      <h3><%= site_status_badge(site) %></h3>
+    </header>
+  </div>
+  <div class="aside-buttons">
+    <%= link_to admin_edit_site_path, class: "aside-btn" do %>
+      <i class="fa-solid fa-gear"></i> Configuration
+    <% end %>
+    <%= link_to root_path, class: "aside-btn" do %>
+      <i class="fa-solid fa-arrow-left"></i> Quitter
+    <% end %>
+  </div>
+</aside>
