@@ -32,6 +32,11 @@ module SitesHelper
       .background.gradient {
         background: linear-gradient(to #{background_gradient}, var(--color-secondary) 0%, var(--color-primary) 100%);
       }
+      @media (min-width: 1100px) {
+        .wrapper {
+          margin: 10px 0 10px 0!important;
+        }
+      }
     CSS
   end
 

@@ -34,6 +34,8 @@
       <%= f.file_field :aside_image, class: "mt-1 block w-full", direct_upload: true %>
     </div>
 
+    <%= render "admin/sites/setting_fields", site: @site %>
+
     <div data-controller="nested-form" data-nested-form-association-value="social_links">
       <button type="button"
         data-action="nested-form#add"
