@@ -34,7 +34,7 @@
                     <!-- Actions -->
                     <td class="py-2 text-right whitespace-nowrap">
                       <div class="text-center align-middle justify-end items-center mx-6">
-                        <%= link_to admin_site_path(site), class: "text-gray-500 hover:text-blue-600", title: "Modifier" do %>
+                        <%= link_to admin_site_path(site), class: "text-gray-500 hover:text-blue-600", title: "Modifier", data: { turbo: false } do %>
                           <i class="fas fa-edit"></i>
                         <% end %>
                         <%= link_to site_path(site.slug), class: "text-gray-500 hover:text-green-600", title: "Visiter", target: "_blank" do %>

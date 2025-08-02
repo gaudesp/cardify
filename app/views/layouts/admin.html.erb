@@ -12,6 +12,16 @@
 
     <style>
       <%= app_theme_css() %>
+      :root {
+        --color-secondary: #4b72c2;
+        --color-secondary-rgb: 75, 114, 194;
+        --color-primary: #6fb4c7;
+        --color-primary-rgb: 111, 180, 199;
+        --radius: 0;
+      }
+      .background.gradient {
+        background: linear-gradient(to bottom, var(--color-secondary) 0%, var(--color-primary) 100%);
+      }
     </style>
 
     <link rel="icon" href="/icon.png" type="image/png">
