@@ -12,12 +12,13 @@ site = Site.create!(
   company_name: "Naro'StreetFood",
   phone_number: "0646786955",
   contact_email: "narostf@gmail.com",
-  published: true
+  published: true,
+  setting: {"theme"=>{"radius"=>"30px", "color_primary"=>"#7caa7c", "color_secondary"=>"#7eb0c2", "background_gradient"=>"bottom right"}}
 )
 
 site.aside_image.attach(
-  io: File.open(Rails.root.join("db/seeds/images/aside.jpg")),
-  filename: "aside.jpg",
+  io: File.open(Rails.root.join("db/seeds/images/naro_streetfood.jpg")),
+  filename: "naro_streetfood.jpg",
   content_type: "image/jpeg"
 )
 
@@ -110,12 +111,13 @@ site = Site.create!(
   company_name: "Pizza Kea",
   phone_number: "0780977831",
   contact_email: "pizzakea@gmail.com",
-  published: true
+  published: true,
+  setting: {"theme"=>{"radius"=>"15px", "color_primary"=>"#bd2b2f", "color_secondary"=>"#489f5f", "background_gradient"=>"right"}}
 )
 
 site.aside_image.attach(
-  io: File.open(Rails.root.join("db/seeds/images/aside2.jpg")),
-  filename: "aside2.jpg",
+  io: File.open(Rails.root.join("db/seeds/images/pizza_kea.jpg")),
+  filename: "pizza_kea.jpg",
   content_type: "image/jpeg"
 )
 
