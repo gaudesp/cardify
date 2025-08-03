@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || @site.company_name %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    
+    <title><%= content_for(:title) || "Cardify" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -12,7 +11,7 @@
     <%= yield :head %>
 
     <style>
-      <%= site_theme_css_vars(@site) if @site.present? %>
+      <%= app_theme_css() unless @site.present? %>
     </style>
 
     <link rel="icon" href="/icon.png" type="image/png">
@@ -21,25 +20,19 @@
 
     <%= tag.link rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css", integrity: "sha512-...", crossorigin: "anonymous", referrerpolicy: "no-referrer" %>
     <%= stylesheet_link_tag :app %>
+    <%= stylesheet_link_tag "application.tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <div class="background gradient"></div>
-    <main id="appContent"
-      data-controller="<%= @is_mobile ? 'scroll' : 'nav' %>"
-      <% if @is_mobile %> data-scroll-site-value="<%= @site.slug %>" <% end %>>
-      <%= render "sites/nav", site: @site %>
+    <main id="appContent">
       <div class="content">
-        <%= render "sites/aside", site: @site %>
+        <%= render "public/aside" %>
         <div class="wrapper">
           <%= yield %>
         </div>
       </div>
     </main>
-    <button id="scrollTopBtn" aria-label="Retour en haut" class="scroll-top-btn">
-      <i class="fa-solid fa-arrow-up"></i>
-      <span class="sr-only">Retour en haut</span>
-    </button>
   </body>
 </html>

@@ -1,0 +1,45 @@
+<%= form_with model: [:admin, site], local: true, data: { controller: "accordion" } do |f| %>
+  <div class="border-b">
+    <button type="button" data-action="accordion#toggle" data-index="0"
+      class="w-full text-left py-3 font-semibold flex justify-between items-center">
+      <span>Général</span>
+      <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
+    </button>
+    <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
+      <div class="p-4 space-y-4">
+        <%= render "admin/sites/fields", f: f %>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-b">
+    <button type="button" data-action="accordion#toggle" data-index="1"
+      class="w-full text-left py-3 font-semibold flex justify-between items-center">
+      <span>Thème</span>
+      <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
+    </button>
+    <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
+      <div class="p-4">
+        <%= render "admin/sites/setting/fields", f: f %>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-b">
+    <button type="button" data-action="accordion#toggle" data-index="2"
+      class="w-full text-left py-3 font-semibold flex justify-between items-center">
+      <span>Réseaux sociaux</span>
+      <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
+    </button>
+    <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
+      <div class="p-4">
+        <%= render "admin/sites/social_links/form", f: f %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex mt-6">
+    <%= f.submit "Sauvegarder", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
+  </div>
+
+<% end %>

@@ -1,6 +1,6 @@
 class Site < ApplicationRecord
   belongs_to :user
-  has_many :pages, dependent: :destroy
+  has_many :pages, -> { order(:position) }, dependent: :destroy
   has_many :social_links, dependent: :destroy
   has_one_attached :aside_image
 

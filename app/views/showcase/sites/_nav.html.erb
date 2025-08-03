@@ -10,7 +10,7 @@
           data: {
             action: (@is_mobile ? "scroll#scrollToSection" : nil),
             tab: page.slug,
-            turbo: (@is_mobile ? "false" : nil), # ✅ Turbo désactivé uniquement en mobile
+            turbo: (@is_mobile ? "false" : nil),
             turbo_frame: (@is_mobile ? nil : "page_content"),
             turbo_action: (@is_mobile ? nil : "replace")
           }.compact do %>

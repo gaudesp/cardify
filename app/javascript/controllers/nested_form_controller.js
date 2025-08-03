@@ -11,11 +11,15 @@ export default class extends Controller {
     this.listTarget.insertAdjacentHTML("beforeend", content)
 
     requestAnimationFrame(() => {
+      const items = this.listTarget.querySelectorAll("[data-nested-form-target='item']")
+      const lastItem = items[items.length - 1]
+      if (lastItem) lastItem.scrollIntoView({ behavior: "smooth", block: "start" })
+
       const accordion = this.element.closest("[data-controller~='accordion']")
       if (!accordion) return
 
       const controller = this.application.getControllerForElementAndIdentifier(accordion, "accordion")
-      controller?.refreshHeight(2) // Index 2 = Réseaux sociaux
+      controller?.refreshHeight(2)
     })
   }
 
