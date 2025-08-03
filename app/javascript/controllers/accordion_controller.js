@@ -4,7 +4,8 @@ export default class extends Controller {
   static targets = ["panel", "icon"]
 
   connect() {
-    const persistedIndex = sessionStorage.getItem("accordion-open-index")
+    this.closeAll()
+
     let opened = false
 
     this.panelTargets.forEach((panel, index) => {
@@ -15,8 +16,11 @@ export default class extends Controller {
       }
     })
 
-    if (!opened && persistedIndex) {
-      this.open(parseInt(persistedIndex, 10))
+    const wasSubmitted = sessionStorage.getItem("accordion-opened-after-submit") === "1"
+    if (!opened && wasSubmitted) {
+      const persistedIndex = sessionStorage.getItem("accordion-open-index")
+      if (persistedIndex !== null) this.open(parseInt(persistedIndex, 10))
+      sessionStorage.removeItem("accordion-opened-after-submit")
     }
   }
 

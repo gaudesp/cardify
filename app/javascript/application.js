@@ -4,3 +4,7 @@ import "controllers"
 
 import "trix"
 import "@rails/actiontext"
+
+document.addEventListener("turbo:submit-end", () => {
+  sessionStorage.setItem("accordion-opened-after-submit", "1")
+})
