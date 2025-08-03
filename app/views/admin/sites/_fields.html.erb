@@ -14,3 +14,5 @@
 
 <%= f.label :aside_image, "Image latérale", class: "block text-sm font-medium text-gray-700" %>
 <%= f.file_field :aside_image, class: "mt-1 block w-full", direct_upload: true %>
+
+<%= render partial: "admin/shared/submit_button", locals: { f: f } %>
