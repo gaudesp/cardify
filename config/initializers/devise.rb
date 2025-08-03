@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+Rails.application.config.to_prepare do
+  Devise::SessionsController.layout "public"
+  Devise::RegistrationsController.layout "public"
+  Devise::PasswordsController.layout "public"
+  Devise::ConfirmationsController.layout "public"
+end
+
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from

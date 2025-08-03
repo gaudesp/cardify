@@ -1,0 +1,16 @@
+<%= f.label :company_name, "Nom de l'entreprise", class: "block text-sm font-medium text-gray-700" %>
+<%= f.text_field :company_name,
+  value: @site.errors[:company_name].present? ? @site.company_name_was : f.object.company_name,
+  class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+
+<%= f.label :contact_email, class: "block text-sm font-medium text-gray-700" %>
+<%= f.email_field :contact_email, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+
+<%= f.label :phone_number, class: "block text-sm font-medium text-gray-700" %>
+<%= f.telephone_field :phone_number, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+
+<%= f.label :published, class: "block text-sm font-medium text-gray-700" %>
+<%= f.check_box :published, class: "mt-1" %>
+
+<%= f.label :aside_image, "Image latérale", class: "block text-sm font-medium text-gray-700" %>
+<%= f.file_field :aside_image, class: "mt-1 block w-full", direct_upload: true %>

@@ -15,12 +15,8 @@ export default class extends Controller {
       }
     })
 
-    if (!opened) {
-      if (persistedIndex) {
-        this.open(parseInt(persistedIndex, 10))
-      } else {
-        this.open(0) // default to first panel
-      }
+    if (!opened && persistedIndex) {
+      this.open(parseInt(persistedIndex, 10))
     }
   }
 

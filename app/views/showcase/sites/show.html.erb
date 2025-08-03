@@ -2,13 +2,13 @@
   <% if @is_mobile %>
     <% @pages.each do |page| %>
       <section data-scroll-target="section" data-slug="<%= page.slug %>" id="<%= page.slug %>">
-        <%= render partial: "pages/show", locals: { page: page } %>
+        <%= render page %>
       </section>
     <% end %>
   <% else %>
     <section id="<%= @page.slug %>">
       <turbo-frame id="page_content">
-        <%= render partial: "pages/show", locals: { page: @page } %>
+        <%= render @page %>
       </turbo-frame>
     </section>
   <% end %>

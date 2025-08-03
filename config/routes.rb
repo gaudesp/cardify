@@ -4,16 +4,31 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  namespace :admin do
-    get "/", to: redirect("/")
-    get "/:site_slug", to: "sites#index", as: :sites
-    get "/:site_slug/edit", to: "sites#edit", as: :edit_site
-    patch "/:site_slug", to: "sites#update", as: :site
-  end
-  
-  root to: 'base#index'
+  scope module: :public do
+    authenticated :user do
+      root to: 'sites#index', as: :authenticated_root
+    end
 
-  scope constraints: ->(req) { req.params[:site_slug] !~ /^admin$/ } do
-    get "/:site_slug(/:page_slug)", to: "sites#show", as: :site
+    unauthenticated do
+      root to: 'home#index', as: :unauthenticated_root
+    end
+  end
+
+  root to: redirect { |_, req|
+    req.env['warden'].authenticated?(:user) ? '/authenticated_root' : '/unauthenticated_root'
+  }
+
+  namespace :admin do
+    scope "/:site_slug", as: :site do
+      root to: 'home#index'
+      get    "/edit", to: "sites#edit"
+      patch  "/",     to: "sites#update"
+    end
+  end
+
+  scope module: :showcase do
+    scope constraints: ->(req) { req.params[:site_slug] !~ /^admin$/ } do
+      get "/:site_slug(/:page_slug)", to: "sites#show", as: :site
+    end
   end
 end

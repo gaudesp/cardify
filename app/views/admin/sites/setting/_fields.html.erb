@@ -1,0 +1,41 @@
+<div class="mb-4">
+  <%= check_box_tag "site[reset_theme]", "1", false, id: "site_reset_theme", class: "mr-2" %>
+  <%= label_tag "site_reset_theme", "Réinitialiser les paramètres par défaut", class: "text-sm font-medium text-gray-700" %>
+</div>
+
+<div class="mb-4">
+  <div data-controller="theme" data-theme-target="wrapper" class="mb-4">
+    <label
+      data-theme-target="label"
+      for="site_setting_radius"
+      class="block text-sm font-medium text-gray-700">
+      Arrondi des éléments (<%= @site.setting.dig("theme", "radius").to_i %>px)
+    </label>
+    <%= range_field_tag "site[setting][radius]",
+      @site.setting.dig("theme", "radius").to_i,
+      min: 0,
+      max: 30,
+      step: 1,
+      id: "site_setting_radius",
+      class: "w-full mt-1",
+      data: { theme_target: "radius", action: "input->theme#update" } %>
+  </div>
+</div>
+
+<div class="mb-4">
+  <%= label_tag "site_setting_color_primary", "Couleur principale", class: "block text-sm font-medium text-gray-700" %>
+  <%= color_field_tag "site[setting][color_primary]",
+    @site.setting.dig("theme", "color_primary"),
+    id: "site_setting_color_primary",
+    class: "mt-1 block w-full",
+    data: { theme_target: "colorPrimary" } %>
+</div>
+
+<div class="mb-4">
+  <%= label_tag "site_setting_color_secondary", "Couleur secondaire", class: "block text-sm font-medium text-gray-700" %>
+  <%= color_field_tag "site[setting][color_secondary]",
+    @site.setting.dig("theme", "color_secondary"),
+    id: "site_setting_color_secondary",
+    class: "mt-1 block w-full",
+    data: { theme_target: "colorSecondary" } %>
+</div>

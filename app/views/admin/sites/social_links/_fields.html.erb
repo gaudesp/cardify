@@ -3,15 +3,17 @@
 
   <div class="float-right">
     <button type="button"
-            data-action="nested-form#remove"
-            class="text-sm text-red-500 hover:underline">✕ Supprimer</button>
+      data-action="nested-form#remove"
+      class="inline-flex items-center gap-2 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
 
   <div class="mb-2">
     <%= f.label :platform, "Plateforme", class: "block text-sm font-medium text-gray-700" %>
     <%= f.select :platform, SocialLink::ICONS.keys.map { |k| [k.to_s.titleize, k] },
-                 include_blank: true,
-                 class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+          include_blank: true,
+          class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
   </div>
 
   <div class="mb-2">
