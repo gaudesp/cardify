@@ -4,7 +4,7 @@ module Admin
 
     def update
       if current_site.update(site_params)
-        redirect_to admin_site_edit_path(current_site), notice: "Site updated"
+        redirect_to admin_site_edit_path(current_site), notice: "Site successfully updated"
       else
         render :edit, status: :unprocessable_entity
       end
