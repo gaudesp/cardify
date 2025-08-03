@@ -3,7 +3,6 @@
     <%= render partial: "admin/shared/visit_button", locals: { site: @site } %>
       <header>
         <h2><span>C</span>onfiguration du site</h2>
-        <%= link_to "⟵ Retour", admin_site_path, class: "text-sm text-gray-600 hover:underline" %>
       </header>
       <div class="container"><div class="col">
         <%= render "shared/error_messages", resource: @site %>

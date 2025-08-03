@@ -19,6 +19,9 @@ module ApplicationHelper
       .background.gradient {
         background: linear-gradient(to bottom right, var(--color-secondary) 0%, var(--color-primary) 100%);
       }
+      .aside-btn.active {
+        color: var(--color-primary)!important;
+      }
       @media (max-width: 1100px) {
         aside {
           margin-top: 80px!important;

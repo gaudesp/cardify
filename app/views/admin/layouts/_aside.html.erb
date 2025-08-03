@@ -4,11 +4,11 @@
       <h1 class="flex items-center gap-2"><%= site_status_badge(site) %> <%= site.company_name_was %></h1>
     </header>
   </div>
-  <div class="aside-buttons">
-    <%= link_to admin_site_edit_path, class: "aside-btn" do %>
+  <div class="aside-buttons" data-controller="aside">
+    <%= link_to admin_site_edit_path, data: { aside_target: "btn", tab: "admin-edit" }, class: "aside-btn" do %>
       <i class="fa-solid fa-gear"></i> Configuration
     <% end %>
-    <%= link_to root_path(), class: "aside-btn" do %>
+    <%= link_to root_path, data: { aside_target: "btn", tab: "home" }, class: "aside-btn" do %>
       <i class="fa-solid fa-arrow-left"></i> Quitter
     <% end %>
   </div>
