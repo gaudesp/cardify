@@ -29,9 +29,9 @@
     <main id="appContent"
       data-controller="<%= @is_mobile ? 'scroll' : 'nav' %>"
       <% if @is_mobile %> data-scroll-site-value="<%= @site.slug %>" <% end %>>
-      <%= render "showcase/sites/nav", site: @site %>
+      <%= render "showcase/layouts/nav", site: @site %>
       <div class="content">
-        <%= render "showcase/sites/aside", site: @site %>
+        <%= render "showcase/layouts/aside", site: @site %>
         <div class="wrapper">
           <%= yield %>
         </div>
