@@ -1,0 +1,19 @@
+<nav data-controller="nav">
+  <ul>
+    <li
+      data-nav-target="item"
+      data-tab="public"
+    >
+      <%= link_to root_path,
+        class: "nav-link",
+        data: {
+          turbo_frame: "public_content",
+          turbo_action: "replace",
+          tab: "public"
+        } do %>
+        <i class="fa-solid fa-home"></i>
+        <span class="nav-label">Accueil</span>
+      <% end %>
+    </li>
+  </ul>
+</nav>

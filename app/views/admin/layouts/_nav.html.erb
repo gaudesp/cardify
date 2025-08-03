@@ -1,0 +1,19 @@
+<nav data-controller="nav">
+  <ul>
+    <li
+      data-nav-target="item"
+      data-tab="admin"
+    >
+      <%= link_to admin_site_path(@site),
+        class: "nav-link",
+        data: {
+          turbo_frame: "admin_content",
+          turbo_action: "replace",
+          tab: "admin"
+        } do %>
+        <i class="fa-solid fa-gauge"></i>
+        <span class="nav-label">Panel</span>
+      <% end %>
+    </li>
+  </ul>
+</nav>

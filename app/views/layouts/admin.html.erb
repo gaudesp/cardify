@@ -38,6 +38,7 @@
     <%= render "shared/flash" %>
     <div class="background gradient"></div>
     <main id="appContent">
+      <%= render "admin/layouts/nav", site: @site %>
       <div class="content">
         <%= render "admin/layouts/aside", site: @site %>
         <div class="wrapper">

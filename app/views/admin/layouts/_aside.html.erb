@@ -1,8 +1,7 @@
 <aside>
   <div class="info">
     <header>
-      <h1><%= site.company_name_was %></h1>
-      <h3><%= site_status_badge(site) %></h3>
+      <h1 class="flex items-center gap-2"><%= site_status_badge(site) %> <%= site.company_name_was %></h1>
     </header>
   </div>
   <div class="aside-buttons">
