@@ -1,33 +1,39 @@
-<article><section>
-<header>
-  <h2><span>S</span>'inscrire</h2>
-</header>
-<div class="container"><div class="col">
-  <%= render "shared/error_messages", resource: resource %>
+<article>
+  <section>
+    <header>
+      <h2><span>S</span>'inscrire</h2>
+    </header>
+    <div class="container">
+      <div class="col">
+        <%= render "shared/error_messages", resource: resource %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <div class="mb-4">
-      <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+        <div class="mb-4 border rounded bg-gray-50 p-4 space-y-4">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <div class="mb-4">
+              <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+              <% if @minimum_password_length %>
+                <em class="text-xs text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+            </div>
+
+            <%= f.submit "Créer un compte", class: "w-full bg-green-600 text-white py-2 rounded hover:bg-green-700" %>
+          <% end %>
+          <div class="mt-4 text-center text-sm text-gray-600">
+            <%= render "users/shared/links" %>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="mb-4">
-      <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
-      <% if @minimum_password_length %>
-        <em class="text-xs text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
-      <%= f.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
-    </div>
-
-    <div class="mb-4">
-      <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
-    </div>
-
-    <%= f.submit "Créer un compte", class: "w-full bg-green-600 text-white py-2 rounded hover:bg-green-700" %>
-  <% end %>
-
-  <div class="mt-4 text-center text-sm text-gray-600">
-    <%= render "users/shared/links" %>
-  </div>
-</div></div></section></article>
+  </section>
+</article>

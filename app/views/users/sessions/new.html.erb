@@ -1,30 +1,37 @@
-<article><section>
-<header>
-  <h2><span>S</span>e connecter</h2>
-</header>
-<div class="container"><div class="col">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="mb-4">
-      <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
-    </div>
+<article>
+  <section>
+    <header>
+      <h2><span>S</span>e connecter</h2>
+    </header>
+    <div class="container">
+      <div class="col">
+        <div class="mb-4 border rounded bg-gray-50 p-4 space-y-4">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="mb-4">
+              <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+            </div>
 
-    <div class="mb-4">
-      <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
-      <%= f.password_field :password, autocomplete: "current-password", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
-    </div>
+            <div class="mb-4">
+              <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+              <%= f.password_field :password, autocomplete: "current-password", class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+            </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="mb-4 flex items-center">
-        <%= f.check_box :remember_me, class: "mr-2" %>
-        <%= f.label :remember_me, class: "text-sm" %>
+            <% if devise_mapping.rememberable? %>
+              <div class="mb-4 flex items-center">
+                <%= f.check_box :remember_me, class: "mr-2" %>
+                <%= f.label :remember_me, class: "text-sm" %>
+              </div>
+            <% end %>
+
+            <%= f.submit "Se connecter", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
+          <% end %>
+
+          <div class="mt-4 text-center text-sm text-gray-600">
+            <%= render "users/shared/links" %>
+          </div>
+        </div>
       </div>
-    <% end %>
-
-    <%= f.submit "Se connecter", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
-  <% end %>
-
-  <div class="mt-4 text-center text-sm text-gray-600">
-    <%= render "users/shared/links" %>
-  </div>
-</div></div></section></article>
+    </div>
+  </section>
+</article>
