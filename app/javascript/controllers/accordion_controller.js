@@ -30,13 +30,19 @@ export default class extends Controller {
 
       if (!opened && wasSubmitted && pathMatches) {
         const persistedIndex = sessionStorage.getItem("accordion-open-index")
-        if (persistedIndex !== null) this.open(parseInt(persistedIndex, 10))
+        if (persistedIndex !== null) {
+          this.open(parseInt(persistedIndex, 10))
+          opened = true
+        }
         sessionStorage.removeItem("accordion-opened-after-submit")
         sessionStorage.removeItem("accordion-opened-path")
       }
+
+      if (!opened && this.panelTargets.length > 0) {
+        this.open(0)
+      }
     })
   }
-
 
   toggle(event) {
     const index = parseInt(event.currentTarget.dataset.index, 10)
@@ -84,5 +90,4 @@ export default class extends Controller {
 
     this.iconTargets.forEach(icon => (icon.style.transform = "rotate(0deg)"))
   }
-
 }
