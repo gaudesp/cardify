@@ -589,6 +589,11 @@ article header:empty {
 .visit:hover {
   color: var(--color-primary);
 }
+[data-controller~="accordion"] [data-icon-picker-target="panel"] {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  max-height: 0;
+}
 
 /* Utilities */
 .label a:hover {

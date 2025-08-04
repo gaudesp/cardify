@@ -37,6 +37,9 @@ module ApplicationHelper
           border-radius: 0!important;
         }
       }
+      .border {
+        border-color: #dfdfdf!important;
+      }
     CSS
   end
 end

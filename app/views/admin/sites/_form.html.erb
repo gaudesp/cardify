@@ -6,7 +6,7 @@
       <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
     </button>
     <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <div class="p-4 space-y-4">
+      <div class="mb-4 border rounded bg-gray-50 p-4 space-y-4">
         <%= render "admin/sites/fields", f: f %>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
     </button>
     <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <div class="p-4">
+      <div class="mb-4 border rounded bg-gray-50 p-4">
         <%= render "admin/sites/setting/fields", f: f %>
       </div>
     </div>
@@ -32,9 +32,7 @@
       <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
     </button>
     <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <div class="p-4">
-        <%= render "admin/sites/social_links/form", f: f %>
-      </div>
+      <%= render "admin/sites/social_links/form", f: f %>
     </div>
   </div>
 <% end %>

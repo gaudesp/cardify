@@ -1,9 +1,6 @@
 <nav data-controller="nav">
   <ul>
-    <li
-      data-nav-target="item"
-      data-tab="admin"
-    >
+    <li data-nav-target="item" data-tab="admin">
       <%= link_to admin_site_path(@site),
         class: "nav-link",
         data: {
@@ -13,6 +10,19 @@
         } do %>
         <i class="fa-solid fa-gauge"></i>
         <span class="nav-label">Panel</span>
+      <% end %>
+    </li>
+
+    <li data-nav-target="item" data-tab="pages">
+      <%= link_to admin_site_pages_path(@site),
+        class: "nav-link",
+        data: {
+          turbo_frame: "admin_content",
+          turbo_action: "replace",
+          tab: "pages"
+        } do %>
+        <i class="fa-solid fa-file-lines"></i>
+        <span class="nav-label">Pages</span>
       <% end %>
     </li>
   </ul>

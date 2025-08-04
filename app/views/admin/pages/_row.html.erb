@@ -1,0 +1,54 @@
+<%= turbo_frame_tag dom_id(page) do %>
+  <div class="mb-4 flex items-center justify-between gap-4 border rounded bg-gray-50 px-4 py-3 flex-wrap sm:flex-nowrap">
+    <div class="flex items-center gap-1 w-[4.5rem] shrink-0">
+      <% if index > 0 %>
+        <%= button_to move_up_admin_site_page_path(@site, page),
+                      method: :patch,
+                      form: { data: { turbo_stream: true } },
+                      class: "w-8 h-8 flex items-center justify-center rounded bg-gray-200 hover:bg-gray-300 text-gray-700",
+                      title: "Monter" do %>
+          <i class="fa-solid fa-chevron-up"></i>
+        <% end %>
+      <% end %>
+
+      <% if index < total - 1 %>
+        <%= button_to move_down_admin_site_page_path(@site, page),
+                      method: :patch,
+                      form: { data: { turbo_stream: true } },
+                      class: "w-8 h-8 flex items-center justify-center rounded bg-gray-200 hover:bg-gray-300 text-gray-700",
+                      title: "Descendre" do %>
+          <i class="fa-solid fa-chevron-down"></i>
+        <% end %>
+      <% else %>
+        <div class="w-8 h-8"></div>
+      <% end %>
+    </div>
+
+    <div class="flex items-center gap-2 flex-1 min-w-0">
+      <i class="fa-solid fa-<%= page.icon.presence || 'file' %> text-xl text-gray-600 shrink-0"></i>
+      <span class="text-xs font-semibold tracking-wider uppercase text-gray-800">
+        <%= page.label %>
+      </span>
+      <span class="text-sm text-gray-500 truncate">
+        <%= page.title.presence || "(sans titre)" %>
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <%= link_to edit_admin_site_page_path(@site, page),
+                  data: { turbo_frame: "_top" },
+                  title: "Modifier la page",
+                  class: "inline-flex items-center justify-center rounded bg-blue-600 px-2 sm:px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" do %>
+        <i class="fa-solid fa-pen"></i>
+      <% end %>
+
+      <%= button_to admin_site_page_path(@site, page),
+                    method: :delete,
+                    form: { data: { turbo_confirm: "Cette page et tout son contenu seront supprimés. Confirmer ?", turbo_stream: true }, class: "inline" },
+                    title: "Supprimer la page",
+                    class: "inline-flex items-center justify-center rounded bg-red-600 px-2 sm:px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500" do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

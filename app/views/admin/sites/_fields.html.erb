@@ -1,18 +1,39 @@
 <%= f.label :company_name, "Nom de l'entreprise", class: "block text-sm font-medium text-gray-700" %>
 <%= f.text_field :company_name,
   value: @site.errors[:company_name].present? ? @site.company_name_was : f.object.company_name,
-  class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+  class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
 
 <%= f.label :contact_email, class: "block text-sm font-medium text-gray-700" %>
-<%= f.email_field :contact_email, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+<%= f.email_field :contact_email, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
 
 <%= f.label :phone_number, class: "block text-sm font-medium text-gray-700" %>
-<%= f.telephone_field :phone_number, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm" %>
+<%= f.telephone_field :phone_number, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
 
-<%= f.label :published, class: "block text-sm font-medium text-gray-700" %>
-<%= f.check_box :published, class: "mt-1" %>
+<%= f.label :published, "Publié", class: "block text-sm font-medium text-gray-700 mb-1" %>
+
+<div class="flex items-center">
+  <label for="published_toggle" class="relative cursor-pointer">
+    <%= f.check_box :published, class: "sr-only peer", id: "published_toggle" %>
+    <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-green-500 transition-colors"></div>
+    <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transform transition peer-checked:translate-x-5"></div>
+  </label>
+</div>
 
 <%= f.label :aside_image, "Image latérale", class: "block text-sm font-medium text-gray-700" %>
-<%= f.file_field :aside_image, class: "mt-1 block w-full", direct_upload: true %>
+<div class="mt-1" data-controller="file-upload">
+  <label for="site_aside_image"
+    class="w-full flex items-center justify-center px-2 py-3 border border-dashed border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 cursor-pointer transition text-center text-wrap">
+    <span id="file-name" class="flex items-center gap-2 text-gray-600">
+      <i class="fa-solid fa-upload"></i>
+      Choose an image
+    </span>
+  </label>
+
+  <%= f.file_field :aside_image,
+    id: "site_aside_image",
+    class: "sr-only",
+    direct_upload: true,
+    data: { action: "change->file-upload#updateFileName" } %>
+</div>
 
 <%= render partial: "admin/shared/submit_button", locals: { f: f } %>

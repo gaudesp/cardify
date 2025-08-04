@@ -19,6 +19,11 @@ export default class extends Controller {
       const tab = btn.dataset.tab
       if (!tab) return
 
+      if (path.includes("/pages")) {
+        btn.classList.remove("active")
+        return
+      }
+
       const isMatch = this.urlMatchesTab(path, tab)
       btn.classList.toggle("active", isMatch)
     })
@@ -44,5 +49,4 @@ export default class extends Controller {
         return false
     }
   }
-
 }

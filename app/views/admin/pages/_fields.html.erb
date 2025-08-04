@@ -1,0 +1,36 @@
+<%= f.label :title, "Titre", class: "block text-sm font-medium text-gray-700" %>
+<%= f.text_field :title, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+
+<%= f.label :label, "Label (onglet)", class: "block text-sm font-medium text-gray-700" %>
+<%= f.text_field :label, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+
+<div data-controller="icon-picker" class="space-y-2">
+  <%= f.label :icon, class: "block text-sm font-medium text-gray-700 flex items-center gap-2" do %>
+    Icône :
+    <i data-icon-picker-target="preview" class="fa-solid <%= "fa-#{f.object.icon}" if f.object.icon.present? %> text-sm text-gray-600"></i>
+    <%= link_to "(voir la liste)", "https://fontawesome.com/search?f=classic&s=solid&ic=free&o=r",
+      target: "_blank",
+      rel: "noopener",
+      class: "text-blue-600 hover:underline text-sm" %>
+  <% end %>
+  <div class="flex flex-wrap gap-2" data-icon-picker-target="buttons">
+    <% icons = %w[house info-circle utensils briefcase user location-dot at star tools folder-open newspaper truck-front] %>
+    <% icons.each do |icon| %>
+      <button type="button"
+              data-action="icon-picker#select"
+              data-icon-picker-target="button"
+              data-icon-value="<%= icon %>"
+              class="icon-button w-10 h-10 flex items-center justify-center border rounded text-gray-600 hover:bg-gray-100 transition-all mb-2 bg-white"
+              title="<%= icon %>">
+        <i class="fa-solid fa-<%= icon %> text-sm"></i>
+      </button>
+    <% end %>
+  </div>
+
+  <%= f.text_field :icon,
+        class: "block w-full px-3 py-2 border rounded-md shadow-sm bg-white",
+        data: { action: "input->icon-picker#preview", icon_picker_target: "custom" },
+        value: f.object.icon,
+        autocomplete: "off" %>
+
+</div>

@@ -4,34 +4,48 @@ export default class extends Controller {
   static targets = ["panel", "icon"]
 
   connect() {
-    this.closeAll()
+    this.closeAll(true)
 
-    let opened = false
+    const form = this.element.tagName === "FORM" ? this.element : this.element.querySelector("form")
+    if (form) {
+      form.addEventListener("submit", () => {
+        sessionStorage.setItem("accordion-opened-after-submit", "1")
+        sessionStorage.setItem("accordion-opened-path", window.location.pathname)
+      }, { once: true })
+    }
 
-    this.panelTargets.forEach((panel, index) => {
-      const hasError = panel.querySelector(".field_with_errors, [aria-invalid='true']")
-      if (hasError) {
-        this.open(index)
-        opened = true
+    requestAnimationFrame(() => {
+      let opened = false
+
+      this.panelTargets.forEach((panel, index) => {
+        const hasError = panel.querySelector(".field_with_errors, [aria-invalid='true']")
+        if (hasError) {
+          this.open(index)
+          opened = true
+        }
+      })
+
+      const wasSubmitted = sessionStorage.getItem("accordion-opened-after-submit") === "1"
+      const pathMatches = sessionStorage.getItem("accordion-opened-path") === window.location.pathname
+
+      if (!opened && wasSubmitted && pathMatches) {
+        const persistedIndex = sessionStorage.getItem("accordion-open-index")
+        if (persistedIndex !== null) this.open(parseInt(persistedIndex, 10))
+        sessionStorage.removeItem("accordion-opened-after-submit")
+        sessionStorage.removeItem("accordion-opened-path")
       }
     })
-
-    const wasSubmitted = sessionStorage.getItem("accordion-opened-after-submit") === "1"
-    if (!opened && wasSubmitted) {
-      const persistedIndex = sessionStorage.getItem("accordion-open-index")
-      if (persistedIndex !== null) this.open(parseInt(persistedIndex, 10))
-      sessionStorage.removeItem("accordion-opened-after-submit")
-    }
   }
+
 
   toggle(event) {
     const index = parseInt(event.currentTarget.dataset.index, 10)
     const panel = this.panelTargets[index]
-    const isOpen = panel.style.maxHeight && panel.style.maxHeight !== "0px"
+    const isAlreadyOpen = panel.style.maxHeight && panel.style.maxHeight !== "0px"
 
     this.closeAll()
 
-    if (!isOpen) {
+    if (!isAlreadyOpen) {
       this.open(index)
       sessionStorage.setItem("accordion-open-index", index)
     } else {
@@ -63,7 +77,12 @@ export default class extends Controller {
   }
 
   closeAll() {
-    this.panelTargets.forEach(panel => (panel.style.maxHeight = "0px"))
+    this.panelTargets.forEach(panel => {
+      panel.style.overflow = "hidden"
+      panel.style.maxHeight = "0px"
+    })
+
     this.iconTargets.forEach(icon => (icon.style.transform = "rotate(0deg)"))
   }
+
 }

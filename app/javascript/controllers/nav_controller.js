@@ -20,7 +20,8 @@ export default class extends Controller {
     let inShowcaseRoot = false
 
     if (segments[0] === "admin") {
-      currentTab = segments.length === 2 ? "admin" : null
+      // Exemple : /admin/slug/pages → segments[2] = "pages"
+      currentTab = segments[2] || "admin"
     } else if (segments.length === 0) {
       currentTab = "public"
     } else if (segments.length === 1) {
@@ -38,7 +39,6 @@ export default class extends Controller {
       if (isActive) matched = true
     })
 
-    // ✅ Active le 1er onglet uniquement si on est dans la racine showcase
     if (!matched && inShowcaseRoot && this.itemTargets.length > 0) {
       this.itemTargets[0].classList.add("active")
     }

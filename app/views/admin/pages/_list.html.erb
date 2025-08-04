@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "pages_list" do %>
+  <% pages.each_with_index do |page, index| %>
+    <%= render "admin/pages/row", page: page, index: index, total: pages.size %>
+  <% end %>
+<% end %>
