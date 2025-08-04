@@ -1,8 +1,19 @@
-<article><section>
-<%= render "admin/shared/visit_button", site: @site %>
-<header>
-  <h2>
-    <span>T</span>ableau de bord
-  </h2>
-</header>
-</section></article>
+<article>
+  <section>
+    <%= render "admin/shared/visit_button", site: @site %>
+    <header>
+      <h2><span>T</span>ableau de bord</h2>
+    </header>
+    <div class="container">
+      <div class="col">
+        <p>Bienvenue sur votre interface d’administration.</p>
+        Depuis cet espace, gérez votre site en toute simplicité :
+          <ul>
+            <li>- Modifier les informations de votre entreprise</li>
+            <li>- Personnaliser l’apparence de votre site</li>
+            <li>- Créer, organiser et éditer les pages de votre site</li>
+          </ul>
+      </div>
+    </div>
+  </section>
+</article>
