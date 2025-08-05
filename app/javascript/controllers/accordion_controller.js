@@ -11,6 +11,11 @@ export default class extends Controller {
       form.addEventListener("submit", () => {
         sessionStorage.setItem("accordion-opened-after-submit", "1")
         sessionStorage.setItem("accordion-opened-path", window.location.pathname)
+
+        this.panelTargets.forEach((panel, index) => {
+          const isOpen = panel.style.maxHeight && panel.style.maxHeight !== "0px"
+          if (isOpen) sessionStorage.setItem("accordion-open-index", index)
+        })
       }, { once: true })
     }
 
