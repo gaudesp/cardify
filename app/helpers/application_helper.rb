@@ -31,8 +31,8 @@ module ApplicationHelper
       }
       .visit {
         display: flex;
-        align-items: center;
-        padding: 11px 2rem;
+        padding: 1rem 1rem 0 0;
+        height: 71px;
         font-size: 2rem;
         text-decoration: none;
         transition: color 0.2s ease;
@@ -49,8 +49,8 @@ module ApplicationHelper
       @media (max-width: 1099px) {
         .visit {
           position: fixed;
-          top: 0.5rem;
-          right: 0.5rem;
+          top: 0;
+          right: 0;
         }
       }
       .visit:hover {
