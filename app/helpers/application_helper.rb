@@ -30,16 +30,28 @@ module ApplicationHelper
         --radius: 10px;
       }
       .visit {
-        float: right;
-        padding: 11px 2rem;
+        display: flex;
         align-items: center;
+        padding: 11px 2rem;
         font-size: 2rem;
         text-decoration: none;
         transition: color 0.2s ease;
-        position: sticky;
         z-index: 50;
-        top: 0;
-        right: 0;
+      }
+      @media (min-width: 1100px) {
+        .visit {
+          position: sticky;
+          top: 0;
+          right: 0;
+          float: right;
+        }
+      }
+      @media (max-width: 1099px) {
+        .visit {
+          position: fixed;
+          top: 0.5rem;
+          right: 0.5rem;
+        }
       }
       .visit:hover {
         color: var(--color-primary);
@@ -81,7 +93,8 @@ module ApplicationHelper
       }
       .btn-wrapper {
         position: static;
-        padding: 1rem 0 1rem 0;
+        height: 63px;
+        padding: 0.75rem 0 0.75rem 0;
         border-top: 1px solid var(--color-border);
         background-color: white;
       }
@@ -97,11 +110,6 @@ module ApplicationHelper
           z-index: 50;
           display: flex;
           justify-content: center;
-        }
-        .btn-wrapper::before {
-          content: "";
-          display: block;
-          height: 1rem;
         }
         .btn-wrapper input {
           width: auto;

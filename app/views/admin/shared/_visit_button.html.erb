@@ -1,6 +1,6 @@
 <%= link_to (defined?(@page) && @page.present? ? "/#{@site.slug}/#{@page.slug}" : "/#{@site.slug}"),
             target: "_blank",
-            class: "visit inline-block",
+            class: "visit visit-fixed-mobile inline-block",
             role: "button",
             title: "Voir le site" do %>
   <i class="fas fa-eye"></i>
