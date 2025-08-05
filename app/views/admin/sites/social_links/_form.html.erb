@@ -14,8 +14,6 @@
 
   <template data-nested-form-target="template">
     <%= render "admin/sites/social_links/fields",
-      f: nested_form_builder_for(Site.new.social_links.build, 'social_links', 'NEW_RECORD') %>
+      f: nested_form_builder_for(Site.new.social_links.build, 'social_links', 'NEW_RECORD', parent_builder: f) %>
   </template>
-
-  <%= render partial: "admin/shared/submit_button", locals: { f: f } %>
 </div>

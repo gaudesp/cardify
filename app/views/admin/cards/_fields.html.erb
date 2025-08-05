@@ -1,0 +1,26 @@
+<div data-nested-form-target="item" class="mb-4 border rounded bg-gray-50 p-4 space-y-4 relative">
+  <%= f.hidden_field :_destroy %>
+
+  <div class="float-right">
+    <button type="button"
+      data-action="nested-form#remove"
+      class="inline-flex items-center gap-2 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <%= f.label :type, "Type de carte", class: "block text-sm font-medium text-gray-700" %>
+  <%= f.select :type,
+        [["Contenu libre", "CardContent"], ["Menu", "CardMenu"]],
+        { include_blank: true },
+        class: "mt-1 block w-full border rounded px-3 py-2 bg-white",
+        data: { action: "change->nested-form#reloadFields", nested_form_target: "typeSelect" } %>
+
+  <div data-nested-form-target="dynamic">
+    <% if f.object.is_a?(CardContent) %>
+      <%= render "admin/cards/card_content/fields", f: f %>
+    <% elsif f.object.is_a?(CardMenu) %>
+      <%= render "admin/cards/card_menu/fields", f: f %>
+    <% end %>
+  </div>
+</div>

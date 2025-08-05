@@ -1,0 +1,19 @@
+<div data-controller="nested-form" data-nested-form-association-value="cards">
+  <button type="button"
+    data-action="nested-form#add"
+    class="inline-flex items-center gap-2 mb-2 rounded bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+    <i class="fa-solid fa-plus"></i>
+    Ajouter une carte
+  </button>
+
+  <div class="mt-2 space-y-4" data-nested-form-target="list">
+    <%= f.fields_for :cards do |card_fields| %>
+      <%= render "admin/cards/fields", f: card_fields %>
+    <% end %>
+  </div>
+
+  <template data-nested-form-target="template">
+    <%= render "admin/cards/fields",
+      f: nested_form_builder_for(CardContent.new, "cards", "NEW_RECORD", parent_builder: f) %>
+  </template>
+</div>

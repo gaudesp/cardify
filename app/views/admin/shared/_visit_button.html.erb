@@ -1,4 +1,4 @@
-<%= link_to site_path(site.slug),
+<%= link_to (defined?(@page) && @page.present? ? "/#{@site.slug}/#{@page.slug}" : "/#{@site.slug}"),
             target: "_blank",
             class: "visit inline-block",
             role: "button",

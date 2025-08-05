@@ -52,7 +52,29 @@ module Admin
     end
 
     def page_params
-      params.require(:page).permit(:title, :label, :icon)
+      params.require(:page).permit(
+        :title,
+        :label,
+        :icon,
+        cards_attributes: [
+          :id,
+          :type,
+          :_destroy,
+          :content,
+          card_menu_categories_attributes: [
+            :id,
+            :title,
+            :_destroy,
+            card_menu_items_attributes: [
+              :id,
+              :title,
+              :description,
+              :price,
+              :_destroy
+            ]
+          ]
+        ]
+      )
     end
 
     def respond_with_updated_list(notice_message)

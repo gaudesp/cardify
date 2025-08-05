@@ -1,9 +1,9 @@
 
-<div class="mb-4 border rounded bg-gray-50 p-4 space-y-4">
-  <%= form_with model: [:admin, @site, @page], local: true do |f| %>
-    <div class="space-y-4">
-      <%= render "fields", f: f %>
-      <%= render "admin/shared/submit_button", f: f %>
-    </div>
-  <% end %>
-</div>
+
+<%= form_with model: [:admin, @site, @page], local: true do |f| %>
+  <div class="space-y-4">
+    <%= render "fields", f: f %>
+    <%= render "admin/cards/form", f: f %>
+  </div>
+  <%= render "admin/shared/submit_button", f: f %>
+<% end %>

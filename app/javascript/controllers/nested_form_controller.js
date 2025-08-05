@@ -44,4 +44,22 @@ export default class extends Controller {
       controller?.refreshHeight(2)
     })
   }
+
+  reloadFields(event) {
+    const select = event.target
+    const wrapper = select.closest("[data-nested-form-target='item']")
+    const dynamic = wrapper.querySelector("[data-nested-form-target='dynamic']")
+    const type = select.value
+
+    if (!type) return
+
+    const siteSlug = document.body.dataset.siteSlug
+    const url = `/admin/${siteSlug}/cards/fields?type=${type}`
+
+    fetch(url)
+      .then(response => response.text())
+      .then(html => {
+        dynamic.innerHTML = html
+      })
+  }
 }

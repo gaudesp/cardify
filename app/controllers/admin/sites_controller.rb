@@ -20,7 +20,12 @@ module Admin
         :published,
         :aside_image,
         setting: {},
-        social_links_attributes: %i[id platform url _destroy]
+        social_links_attributes: [
+          :id,
+          :platform,
+          :url,
+          :_destroy
+        ]
       )
 
       return base.merge(setting: default_theme) if params[:site][:reset_theme] == "1"

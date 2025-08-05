@@ -35,7 +35,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-site-slug="<%= @site.slug %>">
     <%= render "shared/flash" %>
     <div class="background gradient"></div>
     <main id="appContent">

@@ -25,14 +25,14 @@
     </div>
   </div>
 
-  <div class="border-b">
-    <button type="button" data-action="accordion#toggle" data-index="2"
-      class="w-full text-left py-3 font-semibold flex justify-between items-center">
-      <span>Réseaux sociaux</span>
-      <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
-    </button>
-    <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <%= render "admin/sites/social_links/form", f: f %>
-    </div>
+  <button type="button" data-action="accordion#toggle" data-index="2"
+    class="w-full text-left py-3 font-semibold flex justify-between items-center">
+    <span>Réseaux sociaux</span>
+    <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
+  </button>
+  <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
+    <%= render "admin/sites/social_links/form", f: f %>
   </div>
+
+  <%= render "admin/shared/submit_button", f: f %>
 <% end %>

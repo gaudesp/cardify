@@ -45,21 +45,15 @@ page_menu = Page.create!(
 
 card_info = CardContent.create!(
   page: page_info,
-  position: 1,
-  content: """
-  <p>
-  Foodtruck spécialisé en arancini, basé dans le Pas-de-Calais.
-  </p>
-
-  <p>
-  Chaque recette est préparée maison, à base de produits locaux soigneusement sélectionnés, pour vous offrir une cuisine authentique, généreuse et pleine de caractère.
-  </p>
-
-  <p>
-  Retrouvez-nous régulièrement sur les marchés et événements de la région, et laissez-vous tenter par une pause gourmande aux saveurs de la Sicile.
-  </p>
-  """
+  position: 1
 )
+
+card_info.content = <<~HTML
+  <div>Foodtruck spécialisé en arancini, basé dans le Pas-de-Calais.<br><br></div>
+  <div>Chaque recette est préparée maison, à base de produits locaux soigneusement sélectionnés, pour vous offrir une cuisine authentique, généreuse et pleine de caractère.<br><br></div>
+  <div>Retrouvez-nous régulièrement sur les marchés et événements de la région, et laissez-vous tenter par une pause gourmande aux saveurs de la Sicile.</div>
+HTML
+card_info.save!
 
 card_menu = CardMenu.create!(
   page: page_menu,
@@ -143,21 +137,15 @@ page_menu = Page.create!(
 
 card_info = CardContent.create!(
   page: page_info,
-  position: 1,
-  content: """
-  <p>
-  Foodtruck spécialisé en pizza, basé dans le Pas-de-Calais.
-  </p>
-
-  <p>
-  Je vous propose des Pizzas cuites au feu de bois dans l'esprit des produits locaux, la Welsh avec son cheddar en passant par la Ch'ti au parfum du maroilles.
-  </p>
-
-  <p>
-  Venez déguster d'autres recettes en base tomate ou crème. N'oubliez pas de passer vos commandes !
-  </p>
-  """
+  position: 1
 )
+
+card_info.content = <<~HTML
+  <div>Foodtruck spécialisé en pizza, basé dans le Pas-de-Calais.<br><br></div>
+  <div>Je vous propose des Pizzas cuites au feu de bois dans l'esprit des produits locaux, la Welsh avec son cheddar en passant par la Ch'ti au parfum du maroilles.<br><br></div>
+  <div>Venez déguster d'autres recettes en base tomate ou crème. N'oubliez pas de passer vos commandes !</div>
+HTML
+card_info.save!
 
 card_menu = CardMenu.create!(
   page: page_menu,

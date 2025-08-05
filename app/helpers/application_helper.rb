@@ -1,12 +1,25 @@
 module ApplicationHelper
-  def nested_form_builder_for(object, association, index)
+  def nested_form_builder_for(object, association, index, parent_builder: nil)
+    object_name =
+      if parent_builder
+        "#{parent_builder.object_name}[#{association}_attributes][#{index}]"
+      else
+        "#{object.model_name.param_key}[#{association}_attributes][#{index}]"
+      end
+
+    template = parent_builder&.instance_variable_get(:@template) || self
+    template = controller.view_context if template == self && defined?(controller)
+
+    options = parent_builder&.instance_variable_get(:@options) || {}
+
     ActionView::Helpers::FormBuilder.new(
-      "site[#{association}_attributes][#{index}]",
+      object_name,
       object,
-      self,
-      {}
+      template,
+      options
     )
   end
+
   def app_theme_css()
     <<~CSS.html_safe
       :root {
@@ -16,6 +29,29 @@ module ApplicationHelper
         --color-secondary-rgb: 80, 162, 161;
         --radius: 10px;
       }
+      .visit {
+        float: right;
+        padding: 11px 2rem;
+        align-items: center;
+        font-size: 2rem;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        position: sticky;
+        z-index: 50;
+        top: 0;
+        right: 0;
+      }
+      .visit:hover {
+        color: var(--color-primary);
+      }
+      [data-accordion-target="panel"] {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        max-height: 0;
+      }
+      [data-accordion-target="panel"].is-open {
+        max-height: 9999px;
+      }
       .background.gradient {
         background: linear-gradient(to bottom right, var(--color-secondary) 0%, var(--color-primary) 100%);
       }
@@ -24,7 +60,7 @@ module ApplicationHelper
       }
       @media (max-width: 1100px) {
         aside {
-          margin-top: 80px!important;
+          margin-top: 100px!important;
           border-radius: var(--radius) var(--radius) 0 0!important;
         }
       }
@@ -38,7 +74,57 @@ module ApplicationHelper
         }
       }
       .border {
-        border-color: #dfdfdf!important;
+        border-color: var(--color-border);
+      }
+      .border-b {
+        border-color: var(--color-border);
+      }
+      .btn-wrapper {
+        position: static;
+        padding: 1rem 0 1rem 0;
+        border-top: 1px solid var(--color-border);
+        background-color: white;
+      }
+      @media (max-width: 1099px) {
+        .container {
+          margin-bottom: 5rem;
+        }
+        .btn-wrapper {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          z-index: 50;
+          display: flex;
+          justify-content: center;
+        }
+        .btn-wrapper::before {
+          content: "";
+          display: block;
+          height: 1rem;
+        }
+        .btn-wrapper input {
+          width: auto;
+        }
+        .btn-wrapper input {
+          width: 50%;
+        }
+      }
+      @media (max-width: 655px) {
+        .btn-wrapper {
+          padding: 1rem;
+        }
+        .btn-wrapper input {
+          width: 100%;
+        }
+      }
+      @media (min-width: 1100px) {
+        .btn-wrapper {
+          position: sticky;
+          bottom: 0;
+          display: flex;
+          justify-content: flex-end;
+        }
       }
     CSS
   end
