@@ -1,9 +1,8 @@
-<header>
-  <% first_letter = page.title[0] %>
-  <% rest_of_title = page.title[1..] %>
-  <h2><span><%= first_letter %></span><%= rest_of_title %></h2>
-</header>
-
 <% page.cards.each do |card| %>
+  <header>
+    <% first_letter = card.title[0] %>
+    <% rest_of_title = card.title[1..] %>
+    <h2><span><%= first_letter %></span><%= rest_of_title %></h2>
+  </header>
   <%= render card %>
 <% end %>

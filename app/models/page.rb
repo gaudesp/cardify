@@ -6,20 +6,20 @@ class Page < ApplicationRecord
 
   before_validation :generate_slug, on: :create
   validates :slug, presence: true, uniqueness: { scope: :site_id }
-  validates :label, presence: true, uniqueness: { scope: :site_id }
+  validates :tab, presence: true, uniqueness: { scope: :site_id }
   validates :icon, presence: true, uniqueness: { scope: :site_id }
 
   def to_param
     slug
   end
 
-  def label
+  def tab
     super&.upcase
   end
 
   private
 
   def generate_slug
-    self.slug ||= label.to_s.parameterize
+    self.slug ||= tab.to_s.parameterize
   end
 end

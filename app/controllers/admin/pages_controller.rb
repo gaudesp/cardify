@@ -53,11 +53,11 @@ module Admin
 
     def page_params
       params.require(:page).permit(
-        :title,
-        :label,
+        :tab,
         :icon,
         cards_attributes: [
           :id,
+          :title,
           :type,
           :_destroy,
           :content,

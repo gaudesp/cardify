@@ -79,6 +79,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_30_101209) do
 
   create_table "cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "page_id", null: false
+    t.string "title", null: false
     t.string "type", null: false
     t.integer "position"
     t.jsonb "setting", default: {}
@@ -90,8 +91,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_30_101209) do
 
   create_table "pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "site_id", null: false
-    t.string "title", null: false
-    t.string "label", null: false
+    t.string "tab", null: false
     t.string "slug", null: false
     t.string "icon", null: false
     t.integer "position"

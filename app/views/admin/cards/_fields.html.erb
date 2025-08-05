@@ -8,7 +8,9 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
-
+  <%= f.label :title, "Titre", class: "block text-sm font-medium text-gray-700" %>
+  <%= f.text_field :title, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+  
   <%= f.label :type, "Type de carte", class: "block text-sm font-medium text-gray-700" %>
   <%= f.select :type,
         [["Contenu libre", "CardContent"], ["Menu", "CardMenu"]],

@@ -29,22 +29,21 @@ site.social_links.create!([
 
 page_info = Page.create!(
   site: site,
-  title: "A propos",
-  label: "info",
+  tab: "info",
   icon: "info-circle",
   position: 1
 )
 
 page_menu = Page.create!(
   site: site,
-  title: "Notre carte",
-  label: "menu",
+  tab: "menu",
   icon: "utensils",
   position: 2
 )
 
 card_info = CardContent.create!(
   page: page_info,
+  title: "A propos",
   position: 1
 )
 
@@ -57,6 +56,7 @@ card_info.save!
 
 card_menu = CardMenu.create!(
   page: page_menu,
+  title: "Notre carte",
   position: 2
 )
 
@@ -121,21 +121,20 @@ site.social_links.create!([
 
 page_info = Page.create!(
   site: site,
-  title: "A propos",
-  label: "info",
+  tab: "info",
   icon: "info-circle",
   position: 1
 )
 
 page_menu = Page.create!(
   site: site,
-  title: "Notre carte",
-  label: "menu",
+  tab: "menu",
   icon: "utensils",
   position: 2
 )
 
 card_info = CardContent.create!(
+  title: "A propos",
   page: page_info,
   position: 1
 )
@@ -148,6 +147,7 @@ HTML
 card_info.save!
 
 card_menu = CardMenu.create!(
+  title: "Notre carte",
   page: page_menu,
   position: 2
 )
