@@ -23,7 +23,6 @@ Rails.application.routes.draw do
       root to: 'home#index'
       get    "/edit", to: "sites#edit"
       patch  "/",     to: "sites#update"
-      get "cards/fields", to: "cards#fields"
       resources :pages, except: [:show], controller: 'pages' do
         member do
           patch :move_up

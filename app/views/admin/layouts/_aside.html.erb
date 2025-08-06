@@ -8,7 +8,7 @@
     <%= link_to admin_site_edit_path, data: { aside_target: "btn", tab: "admin-edit" }, class: "aside-btn" do %>
       <i class="fa-solid fa-gear"></i> Configuration
     <% end %>
-    <%= link_to root_path, data: { aside_target: "btn", tab: "home" }, class: "aside-btn" do %>
+    <%= link_to root_path, data: { turbo: false, aside_target: "btn", tab: "home" }, class: "aside-btn" do %>
       <i class="fa-solid fa-arrow-left"></i> Quitter
     <% end %>
   </div>

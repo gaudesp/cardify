@@ -1,0 +1,22 @@
+<div data-controller="nested-form"
+     data-nested-form-association-value="card_menu_categories">
+  <div data-nested-form-target="list">
+    <%= f.fields_for :card_menu_categories do |category_form| %>
+      <%= render "admin/cards/menu/category/form", f: category_form %>
+    <% end %>
+  </div>
+
+  <template data-nested-form-target="template">
+    <%= render "admin/cards/menu/category/form",
+               f: nested_form_builder_for(CardMenuCategory.new, :card_menu_categories, "NEW_RECORD", parent_builder: f) %>
+  </template>
+
+  <div class="mt-4">
+    <button type="button"
+            data-action="nested-form#add"
+            class="inline-flex items-center gap-2 rounded bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+      <i class="fa-solid fa-plus"></i>
+      Nouvelle catégorie
+    </button>
+  </div>
+</div>

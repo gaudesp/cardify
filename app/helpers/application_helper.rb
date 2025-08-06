@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def form_builder_for(object)
+    ActionView::Helpers::FormBuilder.new(object.model_name.param_key, object, self, {})
+  end
+
   def nested_form_builder_for(object, association, index, parent_builder: nil)
     object_name =
       if parent_builder
@@ -87,6 +91,9 @@ module ApplicationHelper
       }
       .border {
         border-color: var(--color-border);
+      }
+      .border-l {
+        border-color: var(--color-border)!important;
       }
       .border-b {
         border-color: var(--color-border);

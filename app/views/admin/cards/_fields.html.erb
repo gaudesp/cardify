@@ -1,28 +1,27 @@
-<div data-nested-form-target="item" class="mb-4 border rounded bg-gray-50 p-4 space-y-4 relative">
+<div data-nested-form-target="item" class="mb-4 border rounded bg-gray-50 relative overflow-hidden">
   <%= f.hidden_field :_destroy %>
+  <%= f.hidden_field :type %>
 
-  <div class="float-right">
+  <div class="absolute top-0 right-0">
     <button type="button"
       data-action="nested-form#remove"
-      class="inline-flex items-center gap-2 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-      <i class="fa-solid fa-xmark"></i>
+      class="h-10 w-10 flex items-center justify-center bg-white text-red-600 hover:bg-red-50 focus:outline-none border border-t-0 border-r-0 border-b-0">
+      <i class="fa-solid fa-trash-can text-sm"></i>
     </button>
   </div>
-  <%= f.label :title, "Titre", class: "block text-sm font-medium text-gray-700" %>
-  <%= f.text_field :title, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
-  
-  <%= f.label :type, "Type de carte", class: "block text-sm font-medium text-gray-700" %>
-  <%= f.select :type,
-        [["Contenu libre", "CardContent"], ["Menu", "CardMenu"]],
-        { include_blank: true },
-        class: "mt-1 block w-full border rounded px-3 py-2 bg-white",
-        data: { action: "change->nested-form#reloadFields", nested_form_target: "typeSelect" } %>
 
-  <div data-nested-form-target="dynamic">
-    <% if f.object.is_a?(CardContent) %>
-      <%= render "admin/cards/card_content/fields", f: f %>
-    <% elsif f.object.is_a?(CardMenu) %>
-      <%= render "admin/cards/card_menu/fields", f: f %>
-    <% end %>
+  <div>
+    <div>
+      <%= f.text_field :title, placeholder: "Titre de la section", class: "block w-full p-2 border border-t-0 border-l-0 text-center bg-white focus:outline-none" %>
+    </div>
+
+    <div class="p-4 space-y-4" data-nested-form-target="dynamic">
+      <% case f.object.type
+        when "CardContent" %>
+        <%= render "admin/cards/content/fields", f: f %>
+      <% when "CardMenu" %>
+        <%= render "admin/cards/menu/fields", f: f %>
+      <% end %>
+    </div>
   </div>
 </div>

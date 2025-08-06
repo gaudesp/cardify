@@ -6,7 +6,9 @@
       </header>
       <div class="container"><div class="col">
         <%= render "shared/error_messages", resource: @site %>
-        <%= render 'form', site: @site %>
+        <div data-controller="accordion">
+          <%= render 'form', site: @site %>
+        </div>
       </div>
     </div>
   </section>

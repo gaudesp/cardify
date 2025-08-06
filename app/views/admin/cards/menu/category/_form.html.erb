@@ -1,0 +1,63 @@
+<section data-controller="accordion"
+         data-nested-form-target="item"
+         class="mb-4 border rounded overflow-hidden bg-white">
+
+  <div class="flex items-stretch border-b">
+    <!-- Input -->
+    <div class="flex-grow">
+      <input type="text"
+             name="<%= f.object_name %>[title]"
+             value="<%= f.object.title %>"
+             placeholder="Nom de la catégorie"
+             class="bg-transparent border-transparent p-2 w-full focus:outline-none focus:ring-0"
+             onClick="event.stopPropagation()"
+             onFocus="event.stopPropagation()"
+             onMouseDown="event.stopPropagation()" />
+    </div>
+
+    <!-- Chevron toggle -->
+    <button type="button"
+            data-accordion-target="toggle"
+            data-action="accordion#toggle"
+            class="flex items-center px-3 hover:bg-gray-50 focus:bg-gray-200 border-l">
+      <i data-accordion-target="icon"
+         class="fa-solid fa-chevron-down transition-transform duration-200"></i>
+    </button>
+
+    <!-- Remove button -->
+    <button type="button"
+            data-action="nested-form#remove"
+            class="flex items-center px-3 text-red-600 hover:bg-red-50 border-l">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <div data-accordion-target="panel" class="transition-all overflow-hidden">
+    <div class="p-4 space-y-4 bg-white max-[500px]:p-0 max-[500px]:space-y-0">
+      <%= f.hidden_field :_destroy %>
+
+      <!-- Liste des items -->
+      <div data-controller="nested-form" data-nested-form-exclude-scroll-value="true" data-nested-form-association-value="card_menu_items">
+        <div data-nested-form-target="list" class="space-y-2 max-[500px]:space-y-0">
+          <%= f.fields_for :card_menu_items do |item_form| %>
+            <%= render "admin/cards/menu/item/form", f: item_form %>
+          <% end %>
+        </div>
+
+        <template data-nested-form-target="template">
+          <%= render "admin/cards/menu/item/form",
+                f: nested_form_builder_for(CardMenuItem.new, :card_menu_items, "NEW_RECORD", parent_builder: f) %>
+        </template>
+
+        <div class="pt-2">
+          <button type="button"
+                  data-action="nested-form#add"
+                  class="border inline-flex items-center gap-2 rounded bg-gray-50 px-3 py-1.5 text-sm font-medium hover:bg-gray-100 focus:outline-none">
+            <i class="fa-solid fa-plus"></i>
+            Nouvelle ligne
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

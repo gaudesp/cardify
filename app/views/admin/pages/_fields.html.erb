@@ -1,34 +1,35 @@
 <div class="mb-4 border rounded bg-gray-50 p-4 space-y-4">
-  <%= f.label :label, "Tab", class: "block text-sm font-medium text-gray-700" %>
-  <%= f.text_field :tab, class: "mt-1 block w-full px-3 py-2 border rounded-md shadow-sm bg-white" %>
+  <div>
+    <%= f.text_field :tab, placeholder: "Nom de l'onglet", class: "focus:outline-none block w-full p-2 border rounded-md bg-white" %>
+  </div>
 
-  <div data-controller="icon-picker" class="space-y-2">
-    <%= f.label :icon, class: "block text-sm font-medium text-gray-700 flex items-center gap-2" do %>
-      Icône :
-      <i data-icon-picker-target="preview" class="fa-solid <%= "fa-#{f.object.icon}" if f.object.icon.present? %> text-sm text-gray-600"></i>
-      <%= link_to "(voir la liste)", "https://fontawesome.com/search?f=classic&s=solid&ic=free&o=r",
-        target: "_blank",
-        rel: "noopener",
-        class: "text-blue-600 hover:underline text-sm" %>
-    <% end %>
-    <div class="flex flex-wrap gap-2" data-icon-picker-target="buttons">
+  <div data-controller="icon-picker" class="space-y-4">
+    <div class="flex flex-wrap gap-2 mb-2" data-icon-picker-target="buttons">
       <% icons = %w[house info-circle utensils briefcase user location-dot at star tools folder-open newspaper truck-front] %>
       <% icons.each do |icon| %>
         <button type="button"
                 data-action="icon-picker#select"
                 data-icon-picker-target="button"
                 data-icon-value="<%= icon %>"
-                class="icon-button w-10 h-10 flex items-center justify-center border rounded text-gray-600 hover:bg-gray-100 transition-all mb-2 bg-white"
+                class="icon-button w-8 h-8 flex items-center justify-center border rounded text-gray-600 hover:bg-blue-50 transition-all bg-white"
                 title="<%= icon %>">
           <i class="fa-solid fa-<%= icon %> text-sm"></i>
         </button>
       <% end %>
     </div>
 
-    <%= f.text_field :icon,
-          class: "block w-full px-3 py-2 border rounded-md shadow-sm bg-white",
-          data: { action: "input->icon-picker#preview", icon_picker_target: "custom" },
-          value: f.object.icon,
-          autocomplete: "off" %>
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500">
+        <i data-icon-picker-target="preview"
+          class="fa-solid <%= "fa-#{f.object.icon}" if f.object.icon.present? %>"></i>
+      </span>
+
+      <%= f.text_field :icon,
+            placeholder: "Icône de la page",
+            class: "block w-full pl-10 pr-2 py-2 border rounded-md bg-white focus:outline-none",
+            data: { action: "input->icon-picker#preview", icon_picker_target: "custom" },
+            value: f.object.icon,
+            autocomplete: "off" %>
+    </div>
   </div>
 </div>

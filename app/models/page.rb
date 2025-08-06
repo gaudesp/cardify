@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
   belongs_to :site
   acts_as_list scope: :site
-  has_many :cards, dependent: :destroy
+  has_many :cards, -> { order(:position) }, inverse_of: :page, dependent: :destroy
   accepts_nested_attributes_for :cards, allow_destroy: true
 
   before_validation :generate_slug, on: :create

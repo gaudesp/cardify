@@ -1,6 +1,6 @@
-<%= form_with model: [:admin, site], local: true, data: { controller: "accordion" } do |f| %>
+<%= form_with model: [:admin, site], local: true, data: { controller: "accordion", accordion_key_value: "site-settings" } do |f| %>
   <div class="border-b">
-    <button type="button" data-action="accordion#toggle" data-index="0"
+    <button type="button" data-action="accordion#toggle" data-accordion-target="toggle"
       class="w-full text-left py-3 font-semibold flex justify-between items-center">
       <span>Général</span>
       <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
@@ -13,19 +13,19 @@
   </div>
 
   <div class="border-b">
-    <button type="button" data-action="accordion#toggle" data-index="1"
+    <button type="button" data-action="accordion#toggle" data-accordion-target="toggle"
       class="w-full text-left py-3 font-semibold flex justify-between items-center">
       <span>Thème</span>
       <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
     </button>
     <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <div class="mb-4 border rounded bg-gray-50 p-4">
+      <div class="mb-4 border rounded bg-gray-50 p-4 space-y-2">
         <%= render "admin/sites/setting/fields", f: f %>
       </div>
     </div>
   </div>
 
-  <button type="button" data-action="accordion#toggle" data-index="2"
+  <button type="button" data-action="accordion#toggle" data-accordion-target="toggle"
     class="w-full text-left py-3 font-semibold flex justify-between items-center">
     <span>Réseaux sociaux</span>
     <span data-accordion-target="icon" class="transition-transform">&#9662;</span>

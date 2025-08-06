@@ -14,7 +14,7 @@ module Admin
     def create
       @page = current_site.pages.new(page_params)
       if @page.save
-        redirect_to admin_site_pages_path(current_site), notice: "Page created"
+        redirect_to edit_admin_site_page_path(@page.site, @page), notice: "Page created"
       else
         render :new, status: :unprocessable_entity
       end
@@ -59,8 +59,8 @@ module Admin
           :id,
           :title,
           :type,
-          :_destroy,
           :content,
+          :_destroy,
           card_menu_categories_attributes: [
             :id,
             :title,
@@ -68,6 +68,7 @@ module Admin
             card_menu_items_attributes: [
               :id,
               :title,
+              :ingredients,
               :description,
               :price,
               :_destroy

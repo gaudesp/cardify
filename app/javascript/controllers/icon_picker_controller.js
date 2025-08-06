@@ -19,13 +19,11 @@ export default class extends Controller {
   }
 
   updateVisual(icon) {
-    this.previewTarget.className = `fa-solid fa-${icon} text-lg`
+    const validIcon = icon?.trim() || "question"
+    this.previewTarget.className = `fa-solid fa-${validIcon} text-lg`
 
     this.buttonTargets.forEach((btn) => {
-      const isActive = btn.dataset.iconValue === icon
-      btn.classList.toggle("ring-2", isActive)
-      btn.classList.toggle("ring-gray-800", isActive)
-      btn.classList.toggle("border-gray-900", isActive)
+      const isActive = btn.dataset.iconValue === validIcon
     })
   }
 }
