@@ -1,0 +1,11 @@
+<div>
+<%= f.select :platform,
+      SocialLink::ICONS.keys.map { |k| [k.to_s.titleize, k] },
+      { include_blank: true } %>
+
+</div>
+
+<div>
+  <%= f.url_field :url,
+        placeholder: "https://..." %>
+</div>

@@ -1,16 +1,14 @@
 <div data-controller="nested-form"
      data-nested-form-association-value="card_menu_categories">
-  <div data-nested-form-target="list">
+  <div data-nested-form-target="list" data-next-index="">
     <%= f.fields_for :card_menu_categories do |category_form| %>
       <%= render "admin/cards/menu/category/form", f: category_form %>
     <% end %>
   </div>
-
   <template data-nested-form-target="template">
     <%= render "admin/cards/menu/category/form",
-               f: nested_form_builder_for(CardMenuCategory.new, :card_menu_categories, "NEW_RECORD", parent_builder: f) %>
+      f: nested_form_builder_for(CardMenuCategory.new, :card_menu_categories, "NEW_RECORD", parent_builder: f) %>
   </template>
-
   <div class="mt-4">
     <button type="button"
             data-action="nested-form#add"

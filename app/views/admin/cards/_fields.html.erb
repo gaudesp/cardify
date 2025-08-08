@@ -1,25 +1,36 @@
-<div data-nested-form-target="item" class="mb-4 border rounded bg-gray-50 relative overflow-hidden">
+<div data-nested-form-target="item"
+     class="mb-4 border rounded bg-gray-50 relative overflow-hidden">
+
   <%= f.hidden_field :_destroy %>
   <%= f.hidden_field :type %>
 
-  <div class="absolute top-0 right-0">
+  <div class="flex items-stretch border-b">
+    <div class="flex-grow">
+      <%= f.panel_field :title,
+            placeholder: "Nom de la section" %>
+    </div>
+
     <button type="button"
-      data-action="nested-form#remove"
-      class="h-10 w-10 flex items-center justify-center bg-white text-red-600 hover:bg-red-50 focus:outline-none border border-t-0 border-r-0 border-b-0">
-      <i class="fa-solid fa-trash-can text-sm"></i>
+            data-accordion-target="toggle"
+            data-action="accordion#toggle"
+            aria-expanded="false"
+            class="flex items-center px-3 bg-white hover:bg-gray-50 focus:bg-gray-200 border-l">
+      <i data-accordion-target="icon"
+         class="fa-solid fa-chevron-down transition-transform duration-200"></i>
+    </button>
+
+    <button type="button"
+            data-action="nested-form#remove"
+            class="flex items-center px-3 bg-white text-red-600 hover:bg-red-50 border-l">
+      <i class="fa-solid fa-trash-can"></i>
     </button>
   </div>
 
-  <div>
-    <div>
-      <%= f.text_field :title, placeholder: "Titre de la section", class: "block w-full p-2 border border-t-0 border-l-0 text-center bg-white focus:outline-none" %>
-    </div>
-
+  <div data-accordion-target="panel" class="transition-all overflow-hidden">
     <div class="p-4 space-y-4" data-nested-form-target="dynamic">
-      <% case f.object.type
-        when "CardContent" %>
+      <% if f.object.type == "CardContent" %>
         <%= render "admin/cards/content/fields", f: f %>
-      <% when "CardMenu" %>
+      <% elsif f.object.type == "CardMenu" %>
         <%= render "admin/cards/menu/fields", f: f %>
       <% end %>
     </div>

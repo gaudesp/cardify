@@ -1,0 +1,15 @@
+<article>
+  <section>
+    <%= render "admin/shared/buttons/visit_showcase" %>
+    <header>
+      <% first_letter = header[0] %>
+      <% rest_of_title = header[1..] %>
+      <h2><span><%= first_letter %></span><%= rest_of_title %></h2>
+    </header>
+    <div class="container">
+      <div class="col">
+        <%= yield %>
+      </div>
+    </div>
+  </section>
+</article>

@@ -5,7 +5,7 @@
   <div class="mb-4">
     <div class="grid grid-cols-2 gap-4">
       <button type="button"
-              data-action="nested-form#add"
+              data-action="nested-form#addRoot"
               data-type="CardContent"
               class="flex items-center justify-center gap-2 rounded border bg-gray-50 hover:bg-blue-50 p-2 transition-all text-gray-800 text-sm font-medium">
         <i class="fa-solid fa-align-left text-lg text-gray-700"></i>
@@ -13,7 +13,7 @@
       </button>
 
       <button type="button"
-              data-action="nested-form#add"
+              data-action="nested-form#addRoot"
               data-type="CardMenu"
               class="flex items-center justify-center gap-2 rounded border bg-gray-50 hover:bg-blue-50 p-2 transition-all text-gray-800 text-sm font-medium">
         <i class="fa-solid fa-utensils text-lg text-gray-700"></i>
@@ -22,33 +22,38 @@
     </div>
   </div>
 
-  <div class="mt-4 space-y-4" data-nested-form-target="list">
-    <%= f.fields_for :cards do |card_fields| %>
-      <%= render "admin/cards/fields", f: card_fields %>
-    <% end %>
+  <!-- ACCORDION PARENT: une seule instance qui gère TOUTES les cards -->
+  <div data-controller="accordion"
+       data-accordion-mode-value="one"
+       data-accordion-key-value="cards-root">
+
+    <div class="mt-4 space-y-4" data-nested-form-target="list" data-next-index="">
+      <%= f.fields_for :cards do |card_fields| %>
+        <%= render "admin/cards/fields", f: card_fields %>
+      <% end %>
+    </div>
+
+    <template data-nested-form-target="template" data-type="CardContent">
+      <%= render "admin/cards/fields",
+        f: nested_form_builder_for(
+          CardContent.new(type: "CardContent"),
+          "cards",
+          "NEW_RECORD",
+          parent_builder: f
+        ) %>
+    </template>
+
+    <template data-nested-form-target="template" data-type="CardMenu">
+      <% card = CardMenu.new(type: "CardMenu") %>
+      <% cat = card.card_menu_categories.build %>
+      <% cat.card_menu_items.build %>
+      <%= render "admin/cards/fields",
+        f: nested_form_builder_for(
+          card,
+          "cards",
+          "NEW_RECORD",
+          parent_builder: f
+        ) %>
+    </template>
   </div>
-
-  <template data-nested-form-target="template" data-type="CardContent">
-    <%= render "admin/cards/fields",
-      f: nested_form_builder_for(
-        CardContent.new(type: "CardContent"),
-        "cards",
-        "NEW_RECORD",
-        parent_builder: f
-      ) %>
-  </template>
-
-  <template data-nested-form-target="template" data-type="CardMenu">
-    <% card = CardMenu.new(type: "CardMenu") %>
-    <% cat = card.card_menu_categories.build %>
-    <% cat.card_menu_items.build %>
-
-    <%= render "admin/cards/fields",
-      f: nested_form_builder_for(
-        card,
-        "cards",
-        "NEW_RECORD",
-        parent_builder: f
-      ) %>
-  </template>
 </div>

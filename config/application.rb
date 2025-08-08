@@ -20,6 +20,8 @@ Bundler.require(*Rails.groups)
 
 module Cardify
   class Application < Rails::Application
+    config.action_view.default_form_builder = "CustomFormBuilder"
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 

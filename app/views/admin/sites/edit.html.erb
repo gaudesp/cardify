@@ -1,15 +1,5 @@
-<article>
-  <section>
-    <%= render partial: "admin/shared/visit_button", locals: { site: @site } %>
-      <header>
-        <h2><span>C</span>onfiguration du site</h2>
-      </header>
-      <div class="container"><div class="col">
-        <%= render "shared/error_messages", resource: @site %>
-        <div data-controller="accordion">
-          <%= render 'form', site: @site %>
-        </div>
-      </div>
-    </div>
-  </section>
-</article>
+<%= render "admin/shared/wrappers/page",
+            header: "Configuration du site" do %>
+  <%= render "shared/error_messages", resource: @site %>
+  <%= render 'form' %>
+<% end %>

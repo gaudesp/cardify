@@ -1,0 +1,13 @@
+<div class="border-b">
+  <button type="button"
+          data-accordion-target="toggle"
+          data-action="accordion#toggle"
+          aria-expanded="false"
+          class="w-full text-left py-3 font-semibold flex justify-between items-center">
+    <span><%= panel %></span>
+    <span class="transition-transform">&#9662;</span>
+  </button>
+  <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
+    <%= yield %>
+  </div>
+</div>

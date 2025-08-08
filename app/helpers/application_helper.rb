@@ -16,7 +16,9 @@ module ApplicationHelper
 
     options = parent_builder&.instance_variable_get(:@options) || {}
 
-    ActionView::Helpers::FormBuilder.new(
+    builder_class = parent_builder&.class || ActionView::Helpers::FormBuilder
+
+    builder_class.new(
       object_name,
       object,
       template,
@@ -32,6 +34,16 @@ module ApplicationHelper
         --color-secondary: #50a2a1;
         --color-secondary-rgb: 80, 162, 161;
         --radius: 10px;
+      }
+      [data-accordion-target="panel"] {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+      }
+
+      [data-accordion-target="panel"].is-open {
+        max-height: 9999px;
+        overflow: visible;
       }
       .visit {
         display: flex;
@@ -59,14 +71,6 @@ module ApplicationHelper
       }
       .visit:hover {
         color: var(--color-primary);
-      }
-      [data-accordion-target="panel"] {
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        max-height: 0;
-      }
-      [data-accordion-target="panel"].is-open {
-        max-height: 9999px;
       }
       .background.gradient {
         background: linear-gradient(to bottom right, var(--color-secondary) 0%, var(--color-primary) 100%);

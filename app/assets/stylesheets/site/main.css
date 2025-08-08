@@ -143,6 +143,7 @@
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 .card_menu .item .title:first-child {
   margin-right: 0.5rem;

@@ -1,38 +1,21 @@
-<%= form_with model: [:admin, site], local: true, data: { controller: "accordion", accordion_key_value: "site-settings" } do |f| %>
-  <div class="border-b">
-    <button type="button" data-action="accordion#toggle" data-accordion-target="toggle"
-      class="w-full text-left py-3 font-semibold flex justify-between items-center">
-      <span>Général</span>
-      <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
-    </button>
-    <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <div class="mb-4 border rounded bg-gray-50 p-4 space-y-4">
-        <%= render "admin/sites/fields", f: f %>
-      </div>
+<%= form_with model: [:admin, @site], local: true, data: { controller: "accordion", accordion_mode_value: "one" } do |f| %>
+  <%= render "admin/shared/wrappers/accordion", panel: "Général" do %>
+    <%= render "admin/shared/wrappers/bloc" do %>
+      <%= render "admin/sites/fields", f: f %>
+    <% end %>
+  <% end %>
+
+  <%= render "admin/shared/wrappers/accordion", panel: "Thème" do %>
+    <%= render "admin/shared/wrappers/bloc" do %>
+      <%= render "admin/sites/setting/fields", f: f %>
+    <% end %>
+  <% end %>
+
+  <%= render "admin/shared/wrappers/accordion", panel: "Réseaux sociaux" do %>
+    <div class="space-y-4">
+      <%= render "admin/social_links/nested_form", f: f %>
     </div>
-  </div>
+  <% end %>
 
-  <div class="border-b">
-    <button type="button" data-action="accordion#toggle" data-accordion-target="toggle"
-      class="w-full text-left py-3 font-semibold flex justify-between items-center">
-      <span>Thème</span>
-      <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
-    </button>
-    <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-      <div class="mb-4 border rounded bg-gray-50 p-4 space-y-2">
-        <%= render "admin/sites/setting/fields", f: f %>
-      </div>
-    </div>
-  </div>
-
-  <button type="button" data-action="accordion#toggle" data-accordion-target="toggle"
-    class="w-full text-left py-3 font-semibold flex justify-between items-center">
-    <span>Réseaux sociaux</span>
-    <span data-accordion-target="icon" class="transition-transform">&#9662;</span>
-  </button>
-  <div data-accordion-target="panel" class="overflow-hidden transition-all duration-300 max-h-0">
-    <%= render "admin/sites/social_links/form", f: f %>
-  </div>
-
-  <%= render "admin/shared/submit_button", f: f %>
+  <%= render "admin/shared/buttons/submit_form", f: f %>
 <% end %>

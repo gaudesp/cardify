@@ -3,6 +3,9 @@ class Site < ApplicationRecord
   has_many :pages, -> { order(:position) }, dependent: :destroy
   has_many :social_links, dependent: :destroy
   has_one_attached :aside_image
+  
+  attr_accessor :reset_theme
+  attr_accessor :setting_radius
 
   accepts_nested_attributes_for :social_links, allow_destroy: true
 

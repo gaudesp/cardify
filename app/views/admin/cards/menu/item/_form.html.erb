@@ -1,27 +1,14 @@
-<div data-nested-form-target="item">
+<div data-nested-form-target="item" <%= "data-id='#{f.object.id}'" if f.object.persisted? %>>
   <div class="flex items-center w-full gap-0">
-    <%= f.text_field :title,
-      placeholder: "Label",
-      style: "width: 30%;",
-      class: "max-[500px]:border-none focus:outline-none bg-white border border-r-0 rounded rounded-tr-none rounded-br-none px-2 py-1 h-[38px]" %>
-
-    <%= f.number_field :price,
-      placeholder: "Prix",
-      step: 0.01,
-      style: "width: 15%;",
-      class: "max-[500px]:border-none focus:outline-none bg-white border border-r-0 rounded-none px-2 py-1 h-[38px]" %>
-
-    <%= f.text_field :ingredients,
-      placeholder: "Ingrédients",
-      style: "width: 45%;",
-      class: "max-[500px]:border-none focus:outline-none bg-white border border-r-0 rounded-none px-2 py-1 h-[38px]" %>
-
+    <%= f.text_field :title, placeholder: "Label", style: "width: 40%;", class: "focus:outline-none bg-white border border-t-0 border-l-0 rounded-none px-2 py-1 h-[38px]" %>
+    <%= f.number_field :price, placeholder: "Prix", step: 0.01, style: "width: 10%;", class: "focus:outline-none bg-white border border-t-0 border-l-0 rounded-none px-2 py-1 h-[38px]" %>
+    <%= f.text_field :ingredients, placeholder: "Ingrédients", style: "width: 45%;", class: "focus:outline-none bg-white border border-t-0 border-l-0 rounded-none px-2 py-1 h-[38px]" %>
     <%= f.hidden_field :_destroy %>
     <button type="button"
             data-action="nested-form#remove"
-            style="width: 10%;"
-            class="max-[500px]:border-none inline-flex h-[38px] items-center justify-center text-red-600 border rounded rounded-tl-none rounded-bl-none bg-white hover:bg-red-50 px-3">
-      <i class="fa-solid fa-circle-xmark"></i>
+            style="width: 5%;"
+            class="inline-flex h-[38px] items-center justify-center text-red-600 border border-t-0 border-r-0 border-l-0 bg-white hover:bg-red-50 px-3">
+      <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
 </div>

@@ -19,7 +19,7 @@ module Admin
         :contact_email,
         :published,
         :aside_image,
-        setting: {},
+        setting: [:reset, { theme: [:radius, :color_primary, :color_secondary] }],
         social_links_attributes: [
           :id,
           :platform,
@@ -28,22 +28,20 @@ module Admin
         ]
       )
 
-      return base.merge(setting: default_theme) if params[:site][:reset_theme] == "1"
+      theme = base.dig(:setting, :theme) || {}
 
-      theme = params[:site][:setting]&.permit(:radius, :color_primary, :color_secondary)&.to_h || {}
-      return base if theme.empty?
+      return base.merge(setting: { "theme" => default_theme }) if base.dig(:setting, :reset) == "1"
 
-      base.merge(setting: @site.setting.deep_merge("theme" => theme))
+      base[:setting] = @site.setting.deep_merge("theme" => default_theme.merge(theme.stringify_keys))
+      base
     end
 
     def default_theme
       {
-        "theme" => {
-          "radius" => "10px",
-          "color_primary" => "#86d17c",
-          "color_secondary" => "#50a2a1",
-          "background_gradient" => "bottom right"
-        }
+        "radius" => "10px",
+        "color_primary" => "#86d17c",
+        "color_secondary" => "#50a2a1",
+        "background_gradient" => "bottom right"
       }
     end
   end

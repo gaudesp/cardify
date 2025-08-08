@@ -1,47 +1,22 @@
-
-<div class="flex gap-4 items-center justify-center">
-  <div class="w-11/12">
-    <div>
-      <%= f.text_field :company_name,
-        value: @site.errors[:company_name].present? ? @site.company_name_was : f.object.company_name,
-        placeholder: "Nom de l'entreprise",
-        class: "block w-full p-2 border rounded-md bg-white focus:outline-none" %>
-    </div>
-  </div>
-  <div class="w-1/12">
-    <div>
-      <div class="flex items-center">
-        <label for="published_toggle" class="relative cursor-pointer">
-          <%= f.check_box :published, class: "sr-only peer", id: "published_toggle" %>
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-green-500 transition-colors"></div>
-          <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transform transition peer-checked:translate-x-5"></div>
-        </label>
-      </div>
-    </div>
-  </div>
+<div>
+  <%= f.text_field :company_name,
+        placeholder: "Nom de l'entreprise" %>
 </div>
 
-<div class="flex gap-4">
-  <div class="w-1/2">
-    <%= f.email_field :contact_email, placeholder: "Email de contact", class: "block w-full p-2 border rounded-md bg-white focus:outline-none" %>
-  </div>
-  <div class="w-1/2">
-    <%= f.telephone_field :phone_number, placeholder: "Numéro de téléphone", class: "block w-full p-2 border rounded-md bg-white focus:outline-none" %>
-  </div>
+<div>
+  <%= f.email_field :contact_email %>
 </div>
 
-<div data-controller="file-upload">
-  <label for="site_aside_image"
-    class="w-full flex items-center justify-center px-2 py-3 border border-dashed border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-blue-50 cursor-pointer transition text-center text-wrap">
-    <span id="file-name" class="flex items-center gap-2 text-gray-600">
-      <i class="fa-solid fa-upload"></i>
-      Image latérale
-    </span>
-  </label>
+<div>
+  <%= f.telephone_field :phone_number %>
+</div>
 
+<div>
+  <%= f.switch_field :published,
+        label_text: "Affiché publiquement" %>
+</div>
+
+<div>
   <%= f.file_field :aside_image,
-    id: "site_aside_image",
-    class: "sr-only",
-    direct_upload: true,
-    data: { action: "change->file-upload#updateFileName" } %>
+        label_text: "Image latérale" %>
 </div>
